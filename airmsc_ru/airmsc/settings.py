@@ -67,6 +67,7 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'airmsc.wsgi.application'
 
+with open(os.path.join(BASE_DIR, 'airmsc/databasepswd.txt')) as f:
     DATABASE_PASSWORD = f.read().strip()
 
 DATABASES = {
