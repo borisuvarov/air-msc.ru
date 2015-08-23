@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-with open(os.path.join(BASE_DIR, 'secretkey.txt')) as f:
+with open(os.path.join(BASE_DIR, 'airmsc/secretkey.txt')) as f:
     SECRET_KEY = f.read().strip()
 
 DEBUG = True
@@ -67,7 +67,6 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'airmsc.wsgi.application'
 
-with open(os.path.join(BASE_DIR, 'databasepswd.txt')) as f:
     DATABASE_PASSWORD = f.read().strip()
 
 DATABASES = {
@@ -81,7 +80,7 @@ DATABASES = {
     }
 }
 
-with open(os.path.join(BASE_DIR, 'emailpswd.txt')) as f:
+with open(os.path.join(BASE_DIR, 'airmsc/emailpswd.txt')) as f:
     EMAIL_PASSWORD = f.read().strip()
 
 EMAIL_HOST = 'smtp.yandex.ru'
