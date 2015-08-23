@@ -67,15 +67,16 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'airmsc.wsgi.application'
 
-with open(os.path.join(BASE_DIR, 'airmsc/databasepswd.txt')) as f:
-    DATABASE_PASSWORD = f.read().strip()
+# with open(os.path.join(BASE_DIR, 'airmsc/databasepswd.txt')) as f:
+#     DATABASE_PASSWORD = f.read().strip()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'djangoair',
         'USER': 'djangoair',
-        'PASSWORD': DATABASE_PASSWORD,
+        # 'PASSWORD': DATABASE_PASSWORD,
+        'PASSWORD': 'loh1488',
         'HOST': 'localhost',
         'PORT': '5432',
     }
