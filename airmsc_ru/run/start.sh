@@ -5,12 +5,12 @@ HOMEDIR=/home/djangoair/airmsc
 SOCKFILE=/tmp/${NAME}.sock
 NUM_WORKERS=3
 DJANGO_SETTINGS_MODULE=airmsc.settings
-DJANGODIR=/home/djangoair/airmsc/air/airmsc_ru/airmsc
+DJANGODIR=/home/djangoair/airmsc/air/airmsc_ru
 
 DJANGO_WSGI_MODULE=${NAME}.wsgi
 GUNICORN=${HOMEDIR}/bin/gunicorn
 
-cd /home/djangoair/airmsc
+cd /home/djangoair/airmsc/air/airmsc_ru
 source ${HOMEDIR}/bin/activate
 
 # Если по какой-то причине директории с SOCKFILE не существует -- создаем её
@@ -26,3 +26,5 @@ exec ${GUNICORN} ${DJANGO_WSGI_MODULE}:application \
   --bind unix:${SOCKFILE} \
 # --log-level=debug \
 # --log-file=-
+
+

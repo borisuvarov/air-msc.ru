@@ -61,7 +61,7 @@ TEMPLATES = [
 
 
 AUTHENTICATION_BACKENDS = (
-    'cleanair_main.backend.EmailBackend',
+    'airmsc_main.backend.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
