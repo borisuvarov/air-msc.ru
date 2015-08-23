@@ -1,0 +1,8 @@
+*.txt
+*pycache*
+*.log
+*migrations*
+*bootstrap*
+*jquery*
+*glyphicons*
+*cleanair/static/admin/*
