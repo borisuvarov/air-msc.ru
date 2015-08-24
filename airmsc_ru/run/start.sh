@@ -12,8 +12,6 @@ GUNICORN=${HOMEDIR}/bin/gunicorn
 
 cd /home/djangoair/airmsc/air/airmsc_ru
 source ${HOMEDIR}/bin/activate
-export DJANGO_SETTINGS_MODULE="airmsc.settings"
-exec rqworker --url redis://localhost:6379
 
 
 # Если по какой-то причине директории с SOCKFILE не существует -- создаем её
