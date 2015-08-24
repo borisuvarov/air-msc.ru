@@ -9,7 +9,7 @@ with open(os.path.join(BASE_DIR, 'airmsc/secretkey.txt')) as f:
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["188.166.67.52"]
+ALLOWED_HOSTS = ["188.166.67.52", "air-msc.ru"]
 
 INSTALLED_APPS = (
     'django.contrib.admin',
