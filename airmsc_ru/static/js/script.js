@@ -315,7 +315,8 @@ function init() {
     app = {
             initialize: function() {
                 this.setUpListeners();
-                subscribitions_list = [];
+                subscribitions_list = []
+                var url_var = '/process';
             },
 
             setUpListeners: function() {
@@ -329,6 +330,13 @@ function init() {
                         $('#login_form').show();
                         $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
                     });
+
+                    $('#change-button').on('click', function() {
+                        url_var = '/change';
+                        $('small').text('Подписка изменена');
+                    });
+
+
                 });
             },
 
@@ -387,7 +395,7 @@ function init() {
                     });
 
                     $.ajax({
-                            url: 'process/',
+                            url: url_var,
                             type: 'POST',
                             data: str
                         })

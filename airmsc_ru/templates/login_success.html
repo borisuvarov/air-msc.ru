@@ -29,14 +29,14 @@
             {% csrf_token %}
             <div class="form-group">
 
-              <button type="submit" class="btn btn-primary btn-lg">Изменить подписку</button>
+              <button type="submit" id="change-button" class="btn btn-primary btn-lg">Изменить подписку</button>
             </div>
             <div id="message_box"></div>
           </form>      
      
           <div class="row">
             <div class="col-md-6">
-              <p><a href="" id="select_all"><strong>ВСЕ</a> / <a href="" id="unselect_all">НИ ОДНОЙ</strong></a></p>
+              <p><a href="" id="select_all"><strong>ВСЕ</strong></a> / <a href="" id="unselect_all"><strong>НИ ОДНОЙ</strong></a></p>
               <p class="unchosen" id="donskoyshabolovka">Донской (Шаболовка)</p>
               <p class="unchosen" id="donskoychura">Донской (Чура)</p>
               <p class="unchosen" id="danilovskiy">Даниловский</p>
