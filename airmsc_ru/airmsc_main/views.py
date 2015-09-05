@@ -107,7 +107,7 @@ def change(request):
         if station in true_list:
             member_data.__dict__[station] = True
     member_data.save()
-    template = "unsubscribe_success.html"
+    template = "change_success.html"
     return render(request, template)
 
 
