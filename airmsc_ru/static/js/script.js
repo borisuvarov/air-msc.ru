@@ -310,13 +310,13 @@ function init() {
 };
 
 
+var url_var = '/process';
 
 (function() {
     app = {
             initialize: function() {
                 this.setUpListeners();
-                subscribitions_list = []
-                var url_var = '/process';
+                subscribitions_list = [];
             },
 
             setUpListeners: function() {
