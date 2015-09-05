@@ -95,15 +95,14 @@ def user_login(request):
         return render(request, template)
 
 
-@login_required
-def change(request):
-    member_data = MemberData.objects.get(member=request.user)
-    # true_list = request.POST.dict()['stations'].split(",")
-    # for key in list(clean_subscribitions_dict.keys()):
-    #     clean_subscribitions_dict[key] = False
-    #     if key in true_list:
-    #         clean_subscribitions_dict[key] = True
-
+# @login_required
+# def change(request):
+#     member_data = MemberData.objects.get(member=request.user)
+#     true_list = request.POST.dict()['stations'].split(",")
+#     for key in list(clean_subscribitions_dict.keys()):
+#         clean_subscribitions_dict[key] = False
+#         if key in true_list:
+#             clean_subscribitions_dict[key] = True
 
 
 def unsubscribe(request):
@@ -200,7 +199,7 @@ def process(request):
 
             subject = 'Активация подписки на сайте air-msc.ru'
             sender = 'moscowaircom@yandex.ru'
-            emailvars = {'hash': 'http://188.166.122.88/activation/'
+            emailvars = {'hash': 'http://air-msc.ru/activation/'
                          + '?' + 'pochta=' + email + '&' + 'hash=' + acthash
                          }
             email_content_context = Context(emailvars)
