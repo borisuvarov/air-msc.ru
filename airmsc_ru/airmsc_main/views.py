@@ -102,11 +102,10 @@ def user_login(request):
 @login_required
 def change(request):
     member_data = MemberData.objects.get(member=request.user)
-#     true_list = request.POST.dict()['stations'].split(",")
-#     for key in list(clean_subscribitions_dict.keys()):
-#         clean_subscribitions_dict[key] = False
-#         if key in true_list:
-#             clean_subscribitions_dict[key] = True
+    true_list = request.POST.dict()['stations'].split(",")
+    for station in list(clean_subscribitions_dict.keys()):
+        if station in true_list:
+            member_data.__dict__[station] = True
 
 
 def unsubscribe(request):
