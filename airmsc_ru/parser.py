@@ -236,8 +236,7 @@ def main():
                     (station_name, datetime_of_check, substance, concen))
                 conn.commit()
                 for pdk_tuple in PDK:
-                    # Change to >= in production!
-                    if substance == pdk_tuple[0] and concen <= pdk_tuple[1]:
+                    if substance == pdk_tuple[0] and concen >= pdk_tuple[1]:
                         sentinel = True
                         overpdk_list_for_station.append((substance, concen))
             except:
