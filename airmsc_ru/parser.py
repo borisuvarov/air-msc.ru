@@ -19,7 +19,7 @@ path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if path not in sys.path:
     sys.path.append(path)
 django.setup()
-from airmsc_main.models import Member, Subscribition
+from airmsc_main.models import Member, MemberData
 
 
 STATIONS_LINKS = [
@@ -152,7 +152,7 @@ def get_actual_concentrations(parsed_body):
 #     recipients_and_stations = get_recipients(overpdk_list_all_stations)
 #     for recipient in recipients_and_stations:
 #         member = Member.objects.get(username=recipient)
-#         if member.activated:
+#         if member.is_active:
 #             station_names = ""
 #             poison_names = ""
 #             stations = list(recipients_and_stations[recipient])
@@ -189,7 +189,7 @@ def get_recipients(overpdk_list_all_stations):
     for station_data in overpdk_list_all_stations:
         station_name_id = station_data[0][1]
         station_name = station_data[0][0]
-        query_parameter = 'subscribitions__' + station_name_id
+        query_parameter = 'memberdata__' + station_name_id
         filter_parameter = {query_parameter: True}
         recipients = Member.objects.filter(**filter_parameter)
         for recipient in recipients:
@@ -246,8 +246,8 @@ def main():
     cur.close()
     conn.close()
 
-    if sentinel:
-        send_email(overpdk_list_all_stations)
+#    if sentinel:
+#        send_email(overpdk_list_all_stations)
 
 
 if __name__ == '__main__':
