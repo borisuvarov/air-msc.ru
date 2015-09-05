@@ -337,7 +337,7 @@ var form = $("#main_form");
                         url_var = '/change/';
                         $('#select_all').on('click', app.selectStations);
                         $('#unselect_all').on('click', app.unselectStations);
-                        //form = $("#change-form");
+                        form = $("#change-form");
                         form.on('submit', app.submitForm);
                     });
 
@@ -390,7 +390,7 @@ var form = $("#main_form");
                     submitBtn = form.find('button[type="submit"]');
                     submitBtn.attr('disabled', 'disabled');
 
-                    var str = form.serialize() + "&stations=" + subscribitions_list.toString();
+                    var str = $("#main_form").serialize() + "&stations=" + subscribitions_list.toString();
 
                     $.ajaxSetup({
                         beforeSend: function(xhr, settings) {
