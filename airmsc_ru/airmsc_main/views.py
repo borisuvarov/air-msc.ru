@@ -95,9 +95,9 @@ def user_login(request):
         return render(request, template)
 
 
-# @login_required
-# def change(request):
-#     member_data = MemberData.objects.get(member=request.user)
+@login_required
+def change(request):
+    member_data = MemberData.objects.get(member=request.user)
 #     true_list = request.POST.dict()['stations'].split(",")
 #     for key in list(clean_subscribitions_dict.keys()):
 #         clean_subscribitions_dict[key] = False
