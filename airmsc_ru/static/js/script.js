@@ -391,7 +391,6 @@ var form = $("#main_form");
                     submitBtn.attr('disabled', 'disabled');
 
                     var str = form.serialize() + "&stations=" + subscribitions_list.toString();
-                    console.log(str)
 
                     $.ajaxSetup({
                         beforeSend: function(xhr, settings) {
@@ -407,7 +406,7 @@ var form = $("#main_form");
                         .done(function(msg) {
                             var check_success = "alert-success";
                             if (msg.indexOf(check_success) + 1) {
-                                $('#main_form').html(msg);
+                                form.html(msg);
                             } else {
                                 message_box.append(msg);
                             }
