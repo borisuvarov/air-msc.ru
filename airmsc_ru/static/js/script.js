@@ -333,6 +333,9 @@ var url_var = '/process/';
 
                     $('#change-button').on('click', function() {
                         url_var = '/change/';
+                        $('#change_form').on('submit', app.submitForm);
+                        $('#select_all').on('click', app.selectStations);
+                        $('#unselect_all').on('click', app.unselectStations);
                         $('small').text('Подписка изменена');
                     });
 
