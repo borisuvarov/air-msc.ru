@@ -42,6 +42,10 @@
 	padding-top: 15px;
 }
 
+#help {
+	line-height: 1em;
+}
+
 #error_message {
 	width: 414px;
 	margin-bottom: 10px;
