@@ -1,5 +1,4 @@
-#!/home/djangoair/air/bin/python3
-# git push-pull test, delete later
+#!/home/djangoair/airmsc/bin/python3
 
 import requests
 from lxml import html
