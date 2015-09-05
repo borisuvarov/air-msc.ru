@@ -84,6 +84,10 @@ def user_login(request):
     if user is not None:
         if user.is_active:
             login(request, user)
+            member_data = MemberData.objects.get(member=user)
+            for station in list(clean_subscribitions_dict.keys()):
+                member_data[station] = False
+
             template = "login_success.html"
             return render(request, template)
         else:
