@@ -145,45 +145,45 @@ def get_actual_concentrations(parsed_body):
     return actual_concentrations
 
 
-# Переделать под Celery
-def send_email(overpdk_list_all_stations):
-    subject = 'Предупреждение о загрязнении воздуха!'
-    sender = 'moscowaircom@yandex.ru'
-        
-    recipients_and_stations = get_recipients(overpdk_list_all_stations)
-    for recipient in recipients_and_stations:
-        member = Member.objects.get(username=recipient)
-        if member.activated:
-            station_names = ""
-            poison_names = ""
-            stations = list(recipients_and_stations[recipient])
-            acthash = member.activation_hash
-            for station in stations:
-                if station_names:
-                    station_names = station_names + ", " + station[1]
-                else:
-                    station_names = station_names + station[1]
-                for station_and_poisons in overpdk_list_all_stations:
-                    if station_and_poisons[0][0] in station:
-                        poisons = station_and_poisons[1:]
-                        for poison in poisons:
-                            if poison_names and poison_names.find(poison[0]) == -1:
-                                poison_names = poison_names + ", " + poison[0]
-                            elif not poison_names:
-                                poison_names = poison_names + poison[0]
-                            else:
-                                pass
-
-            emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe': 
-                         'http://188.166.122.88/unsubscribe/' + '?' + 'pochta=' + recipient + '&' 
-                         + 'hash=' + acthash}
-            email_content_context = Context(emailvars)
-            msg_plain = render_to_string('email_poison.html', email_content_context)
-            msg_html = render_to_string('email_poison.html', email_content_context)
-            mail.send_mail(subject, msg_plain, sender, [recipient],
-                           html_message=msg_html, fail_silently=False)
-        else:
-            pass
+# # Переделать под Celery
+# def send_email(overpdk_list_all_stations):
+#     subject = 'Предупреждение о загрязнении воздуха!'
+#     sender = 'moscowaircom@yandex.ru'
+#
+#     recipients_and_stations = get_recipients(overpdk_list_all_stations)
+#     for recipient in recipients_and_stations:
+#         member = Member.objects.get(username=recipient)
+#         if member.activated:
+#             station_names = ""
+#             poison_names = ""
+#             stations = list(recipients_and_stations[recipient])
+#             acthash = member.activation_hash
+#             for station in stations:
+#                 if station_names:
+#                     station_names = station_names + ", " + station[1]
+#                 else:
+#                     station_names = station_names + station[1]
+#                 for station_and_poisons in overpdk_list_all_stations:
+#                     if station_and_poisons[0][0] in station:
+#                         poisons = station_and_poisons[1:]
+#                         for poison in poisons:
+#                             if poison_names and poison_names.find(poison[0]) == -1:
+#                                 poison_names = poison_names + ", " + poison[0]
+#                             elif not poison_names:
+#                                 poison_names = poison_names + poison[0]
+#                             else:
+#                                 pass
+#
+#             emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
+#                          'http://188.166.122.88/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
+#                          + 'hash=' + acthash}
+#             email_content_context = Context(emailvars)
+#             msg_plain = render_to_string('email_poison.html', email_content_context)
+#             msg_html = render_to_string('email_poison.html', email_content_context)
+#             mail.send_mail(subject, msg_plain, sender, [recipient],
+#                            html_message=msg_html, fail_silently=False)
+#         else:
+#             pass
 
 def get_recipients(overpdk_list_all_stations):
     recipients_and_stations = {}
