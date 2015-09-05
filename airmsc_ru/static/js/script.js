@@ -310,7 +310,7 @@ function init() {
 };
 
 
-var url_var = '/process';
+var url_var = '/process/';
 
 (function() {
     app = {
@@ -332,7 +332,7 @@ var url_var = '/process';
                     });
 
                     $('#change-button').on('click', function() {
-                        url_var = '/change';
+                        url_var = '/change/';
                         $('small').text('Подписка изменена');
                     });
 
