@@ -31,6 +31,12 @@
 	margin-bottom: 10px;
 }
 
+#alert-login {
+	text-align: center;
+	width: 460px;
+	margin-bottom: 15px;
+}
+
 #change-form {
 	margin-bottom: 10px;
 }
