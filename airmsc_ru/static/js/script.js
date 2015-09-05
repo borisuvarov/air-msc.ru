@@ -311,6 +311,8 @@ function init() {
 
 
 var url_var = '/process/';
+var form = $("#main_form");
+
 
 (function() {
     app = {
@@ -333,9 +335,8 @@ var url_var = '/process/';
 
                     $('#change-button').on('click', function() {
                         url_var = '/change/';
+                        form = $("#change_form");
                         $('#change_form').on('submit', app.submitForm);
-                        $('#select_all').on('click', app.selectStations);
-                        $('#unselect_all').on('click', app.unselectStations);
                         $('small').text('Подписка изменена');
                     });
 
@@ -385,7 +386,6 @@ var url_var = '/process/';
                     message_box.append('<div id="error_message" class="alert alert-danger">Выберите хотя бы одну станцию!</div>');
                 } else {
 
-                    var form = $("#main_form");
                     submitBtn = form.find('button[type="submit"]');
                     submitBtn.attr('disabled', 'disabled');
 
