@@ -21,9 +21,17 @@
 	margin-top: 5px;
 }
 
-#subscribe-button, #login-button, #change-button {
+#subscribe-button, #login-button, {
 	display: block;
 	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+#change-button {
+	margin-bottom: 10px;
+}
+
+#change-form {
 	margin-bottom: 10px;
 }
 
