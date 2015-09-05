@@ -338,7 +338,7 @@ var form = $("#main_form");
                         $('#select_all').on('click', app.selectStations);
                         $('#unselect_all').on('click', app.unselectStations);
                         form = $("#change-form");
-                        $('#change-button').on('click', app.submitForm);
+                        form.on('submit', app.submitForm);
                         $('small').text('Подписка изменена');
                     });
 
