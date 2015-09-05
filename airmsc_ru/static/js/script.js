@@ -392,6 +392,7 @@ var form = $("#main_form");
                     submitBtn.attr('disabled', 'disabled');
 
                     var str = form.serialize() + "&stations=" + subscribitions_list.toString();
+                    console.log(str)
 
                     $.ajaxSetup({
                         beforeSend: function(xhr, settings) {
