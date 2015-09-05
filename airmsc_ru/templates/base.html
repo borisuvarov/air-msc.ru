@@ -20,12 +20,10 @@
       <div class="row">
         <div class="col-md-7 col-sm-12" id="map"></div>
         <div class="col-md-5 col-sm-12" id="first_slide" >
-          <p id="first_slide_text">
-            <h2>Получайте на почту уведомления<br>
-          при загрязнении воздуха в вашем районе</p></h2>
-          <p id="help">
-            <h2><small>Выберите станции ГПБУ «<a href="http://www.mosecom.ru/air/air-today/">Мосэкомониторинг</a>», введите свой email и&nbsp;нажмите кнопку «Подписаться»</small></h2>
-          </p>
+          <h2 id="first_slide_text">Получайте на почту уведомления<br>
+          при загрязнении воздуха в вашем районе</h2>
+          <h2 id="help"><small>Выберите станции ГПБУ «<a href="http://www.mosecom.ru/air/air-today/">Мосэкомониторинг</a>», введите свой email и&nbsp;нажмите кнопку «Подписаться»</small></h2>
+
           <form id="main_form" class="form-inline" method="POST" action="">
             {% csrf_token %}
             <div class="form-group">
