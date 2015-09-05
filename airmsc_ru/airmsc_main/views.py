@@ -106,6 +106,8 @@ def change(request):
     for station in list(clean_subscribitions_dict.keys()):
         if station in true_list:
             member_data.__dict__[station] = True
+    template = "unsubscribe_success.html"
+    return render(request, template)
 
 
 def unsubscribe(request):
