@@ -86,7 +86,7 @@ def user_login(request):
             login(request, user)
             member_data = MemberData.objects.get(member=user)
             for station in list(clean_subscribitions_dict.keys()):
-                member_data[station] = False
+                print(member_data.get(station), file=sys.stdout)
 
             template = "login_success.html"
             return render(request, template)
