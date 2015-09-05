@@ -335,6 +335,8 @@ var form = $("#main_form");
 
                     $('#change-button').on('click', function() {
                         url_var = '/change/';
+                        $('#select_all').on('click', app.selectStations);
+                        $('#unselect_all').on('click', app.unselectStations);
                         form = $("#change_form");
                         $('#change_form').on('submit', app.submitForm);
                         $('small').text('Подписка изменена');
