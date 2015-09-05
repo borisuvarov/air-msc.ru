@@ -406,7 +406,7 @@ var form = $("#main_form");
                         .done(function(msg) {
                             var check_success = "alert-success";
                             if (msg.indexOf(check_success) + 1) {
-                                form.html(msg);
+                                $("#main_form").html(msg);
                             } else {
                                 message_box.append(msg);
                             }
