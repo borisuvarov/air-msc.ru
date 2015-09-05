@@ -337,8 +337,8 @@ var form = $("#main_form");
                         url_var = '/change/';
                         $('#select_all').on('click', app.selectStations);
                         $('#unselect_all').on('click', app.unselectStations);
-                        form = $("#change_form");
-                        $('#change_form').on('submit', app.submitForm);
+                        form = $("#change-form");
+                        $('#change-button').on('click', app.submitForm);
                         $('small').text('Подписка изменена');
                     });
 
