@@ -59,6 +59,27 @@ clean_subscribitions_dict = {
 }
 
 
+def get_uptime():
+    with open('/home/djangoair/airmsc/air/airmsc_ru/airmsc/databasepswd.txt') as f:
+        DATABASE_PASSWORD = f.read().strip()
+
+    conn = psycopg2.connect(
+        database="djangoair",
+        user="djangoair",
+        password=DATABASE_PASSWORD,
+        host="127.0.0.1")
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT (DISTINCT DATE('checktime')) FROM mosecomon")
+    uptime = cur.fetchall()
+    print('zzz')
+    print(uptime)
+    cur.close()
+    conn.close()
+
+    return uptime
+
+
+
 def activation(request):
     pochta = request.GET.dict()['pochta']
     activationhash = request.GET.dict()['hash']
@@ -130,7 +151,7 @@ def unsubscribe(request):
 def home(request):
     form = MemberModelForm(request.POST or None)
     template = "base.html"
-    context = {"form": form}
+    context = {"form": form, "days": get_uptime()}
     return render(request, template, context)
 
 
@@ -226,7 +247,6 @@ def process(request):
             template = "form_success.html"
             return render(request, template)
 
-    days = 0
     template = "form_errors.html"
-    context = {"form": form, "days": days}
+    context = {"form": form, "days": get_uptime()}
     return render(request, template, context)
