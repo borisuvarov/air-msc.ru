@@ -70,10 +70,8 @@ def get_uptime():
         password=DATABASE_PASSWORD,
         host="127.0.0.1")
     cur = conn.cursor()
-    cur.execute("SELECT COUNT (DISTINCT DATE('checktime')) FROM mosecomon")
+    cur.execute("SELECT COUNT (DISTINCT((DATE(checktime)))) FROM mosecomon;")
     uptime = cur.fetchall()
-    print('zzz')
-    print(uptime)
     cur.close()
     conn.close()
 
