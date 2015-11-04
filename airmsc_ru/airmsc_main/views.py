@@ -11,6 +11,7 @@ import random
 import sys
 from redis import Redis
 from rq import Queue
+import psycopg2
 
 Q = Queue(connection=Redis())
 
