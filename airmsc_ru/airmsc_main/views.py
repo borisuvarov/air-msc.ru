@@ -226,7 +226,7 @@ def process(request):
             template = "form_success.html"
             return render(request, template)
 
-
+    days = 0
     template = "form_errors.html"
-    context = {"form": form}
+    context = {"form": form, "days": days}
     return render(request, template, context)
