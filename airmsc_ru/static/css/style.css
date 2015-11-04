@@ -17,10 +17,6 @@
 	display: none;
 }
 
-#id_password_hash, #id_password {
-	margin-top: 5px;
-}
-
 #subscribe-button, #login-button {
 	display: block;
 	margin-top: 5px;
