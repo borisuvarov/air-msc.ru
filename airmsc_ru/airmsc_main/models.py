@@ -106,6 +106,3 @@ class MemberData(models.Model):
     def __str__(self):
         return str(self.member)
 
-    class Meta:
-        verbose_name_plural = "MemberData"
-        verbose_name = "MemberData"

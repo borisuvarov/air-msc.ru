@@ -1,5 +1,5 @@
 """
-WSGI config for cleanair project.
+WSGI config for airmsc project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

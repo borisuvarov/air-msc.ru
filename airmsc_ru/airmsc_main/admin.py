@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Member, MemberData
+from .models import Member
 
 
 class MemberAdmin(admin.ModelAdmin):
@@ -10,4 +10,3 @@ class MemberAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Member, MemberAdmin)
-admin.site.register(MemberData)

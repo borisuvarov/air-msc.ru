@@ -1,15 +1,19 @@
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 with open(os.path.join(BASE_DIR, 'airmsc/secretkey.txt')) as f:
     SECRET_KEY = f.read().strip()
 
+with open(os.path.join(BASE_DIR, 'airmsc/emailpswd.txt')) as f:
+    EMAIL_PASSWORD = f.read().strip()
+
+with open(os.path.join(BASE_DIR, 'airmsc/databasepswd.txt')) as f:
+    DATABASE_PASSWORD = f.read().strip()
+
 DEBUG = True
 
-ALLOWED_HOSTS = ["188.166.67.52", "air-msc.ru"]
+ALLOWED_HOSTS = ["178.62.213.218", "air-msc.ru"]
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -59,16 +63,12 @@ TEMPLATES = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = (
     'airmsc_main.backend.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 WSGI_APPLICATION = 'airmsc.wsgi.application'
-
-with open(os.path.join(BASE_DIR, 'airmsc/databasepswd.txt')) as f:
-    DATABASE_PASSWORD = f.read().strip()
 
 DATABASES = {
     'default': {
@@ -81,8 +81,6 @@ DATABASES = {
     }
 }
 
-with open(os.path.join(BASE_DIR, 'airmsc/emailpswd.txt')) as f:
-    EMAIL_PASSWORD = f.read().strip()
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_HOST_USER = 'moscowaircom@yandex.ru'
