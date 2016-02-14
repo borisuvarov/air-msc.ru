@@ -11,8 +11,6 @@ import random
 import sys
 from redis import Redis
 from rq import Queue
-import psycopg2
-import datetime
 
 Q = Queue(connection=Redis())
 
@@ -59,37 +57,6 @@ clean_subscribitions_dict = {
     'scherbinka': False,
     'salarievo': False,
 }
-
-
-class UptimeCounter():
-    def __init__(self):
-        self.initial_uptime = self.calculate_uptime()
-        self.last_calculation_time = datetime.date.today()
-
-    @property
-    def uptime(self):
-        if self.last_calculation_time == datetime.date.today():
-            return self.initial_uptime
-        else:
-            return self.calculate_uptime()
-
-    def calculate_uptime(self):
-        with open('/home/djangoair/airmsc/air/airmsc_ru/airmsc/databasepswd.txt') as f:
-            DATABASE_PASSWORD = f.read().strip()
-        conn = psycopg2.connect(
-            database="djangoair",
-            user="djangoair",
-            password=DATABASE_PASSWORD,
-            host="127.0.0.1")
-        cur = conn.cursor()
-        cur.execute("SELECT COUNT (DISTINCT((DATE(checktime)))) FROM mosecomon;")
-        uptime = cur.fetchall()[0][0]
-        cur.close()
-        conn.close()
-        return uptime
-
-
-counter = UptimeCounter()
 
 
 def activation(request):
@@ -162,7 +129,7 @@ def unsubscribe(request):
 def home(request):
     form = MemberModelForm(request.POST or None)
     template = "base.html"
-    context = {"form": form, "days": counter.uptime}
+    context = {"form": form}
     return render(request, template, context)
 
 
@@ -260,5 +227,5 @@ def process(request):
             return render(request, template)
 
     template = "form_errors.html"
-    context = {"form": form, "days": counter.uptime}
+    context = {"form": form}
     return render(request, template, context)
