@@ -176,21 +176,21 @@ def send_email(overpdk_list_all_stations):
                                 poison_names = poison_names + poison[0]
                             else:
                                 pass
+            if station_names:
+                emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
+                             'http://air-msc.ru/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
+                             + 'hash=' + acthash}
+                email_content_context = Context(emailvars)
+                msg_plain = render_to_string('email_poison.html', email_content_context)
+                msg_html = render_to_string('email_poison.html', email_content_context)
 
-            emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
-                         'http://air-msc.ru/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
-                         + 'hash=' + acthash}
-            email_content_context = Context(emailvars)
-            msg_plain = render_to_string('email_poison.html', email_content_context)
-            msg_html = render_to_string('email_poison.html', email_content_context)
-
-            try:
-                Q.enqueue_call(func=mail.send_mail,
-                               args=(subject, msg_plain, sender, [recipient]),
-                               kwargs=({'html_message': msg_html, 'fail_silently': False})
-                               )
-            except Exception as e:
-                sys.stdout.write(str(e))
+                try:
+                    Q.enqueue_call(func=mail.send_mail,
+                                   args=(subject, msg_plain, sender, [recipient]),
+                                   kwargs=({'html_message': msg_html, 'fail_silently': False})
+                                   )
+                except Exception as e:
+                    sys.stdout.write(str(e))
 
         else:
             pass
@@ -210,6 +210,7 @@ def get_recipients(overpdk_list_all_stations):
             if not temp_stations:
                 recipients_and_stations[address] = set()
             recipients_and_stations[address].update((station_name_id, station_name))
+    sys.stdout.write(recipients_and_stations)
     return recipients_and_stations
 
 
