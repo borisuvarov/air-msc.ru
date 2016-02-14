@@ -424,7 +424,8 @@ var processFormUrl = '/process/',
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("alert-success") + 1) {
                         $ajaxContainer.html(data);
-                        $("#change-form").on('submit', app.submitChangeForm);
+                        var $changeForm = $("#change-form");
+                        $changeForm.on('submit', app.submitChangeForm);
                     } else {
                         $messageBox.append(data);
                     }
