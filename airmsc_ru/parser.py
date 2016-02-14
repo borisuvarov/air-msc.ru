@@ -6,6 +6,10 @@ import psycopg2
 import datetime
 import os
 import sys
+
+from redis import Redis
+from rq import Queue
+
 import django
 from django.template.loader import render_to_string
 from django.template import Context
@@ -21,6 +25,7 @@ if path not in sys.path:
 django.setup()
 from airmsc_main.models import Member, MemberData
 
+Q = Queue(connection=Redis())
 
 STATIONS_LINKS = [
     ('Мещанский', 'http://mosecom.ru/air/air-today/station/suhar/table.html',
@@ -144,45 +149,52 @@ def get_actual_concentrations(parsed_body):
     return actual_concentrations
 
 
-# # Переделать под Celery
-# def send_email(overpdk_list_all_stations):
-#     subject = 'Предупреждение о загрязнении воздуха!'
-#     sender = 'moscowaircom@yandex.ru'
-#
-#     recipients_and_stations = get_recipients(overpdk_list_all_stations)
-#     for recipient in recipients_and_stations:
-#         member = Member.objects.get(username=recipient)
-#         if member.is_active:
-#             station_names = ""
-#             poison_names = ""
-#             stations = list(recipients_and_stations[recipient])
-#             acthash = member.activation_hash
-#             for station in stations:
-#                 if station_names:
-#                     station_names = station_names + ", " + station[1]
-#                 else:
-#                     station_names = station_names + station[1]
-#                 for station_and_poisons in overpdk_list_all_stations:
-#                     if station_and_poisons[0][0] in station:
-#                         poisons = station_and_poisons[1:]
-#                         for poison in poisons:
-#                             if poison_names and poison_names.find(poison[0]) == -1:
-#                                 poison_names = poison_names + ", " + poison[0]
-#                             elif not poison_names:
-#                                 poison_names = poison_names + poison[0]
-#                             else:
-#                                 pass
-#
-#             emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
-#                          'http://188.166.122.88/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
-#                          + 'hash=' + acthash}
-#             email_content_context = Context(emailvars)
-#             msg_plain = render_to_string('email_poison.html', email_content_context)
-#             msg_html = render_to_string('email_poison.html', email_content_context)
-#             mail.send_mail(subject, msg_plain, sender, [recipient],
-#                            html_message=msg_html, fail_silently=False)
-#         else:
-#             pass
+def send_email(overpdk_list_all_stations):
+    subject = 'Предупреждение о загрязнении воздуха!'
+    sender = 'moscowaircom@yandex.ru'
+
+    recipients_and_stations = get_recipients(overpdk_list_all_stations)
+    for recipient in recipients_and_stations:
+        member = Member.objects.get(username=recipient)
+        if member.is_active:
+            station_names = ""
+            poison_names = ""
+            stations = list(recipients_and_stations[recipient])
+            acthash = member.activation_hash
+            for station in stations:
+                if station_names:
+                    station_names = station_names + ", " + station[1]
+                else:
+                    station_names = station_names + station[1]
+                for station_and_poisons in overpdk_list_all_stations:
+                    if station_and_poisons[0][0] in station:
+                        poisons = station_and_poisons[1:]
+                        for poison in poisons:
+                            if poison_names and poison_names.find(poison[0]) == -1:
+                                poison_names = poison_names + ", " + poison[0]
+                            elif not poison_names:
+                                poison_names = poison_names + poison[0]
+                            else:
+                                pass
+
+            emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
+                         'http://air-msc.ru/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
+                         + 'hash=' + acthash}
+            email_content_context = Context(emailvars)
+            msg_plain = render_to_string('email_poison.html', email_content_context)
+            msg_html = render_to_string('email_poison.html', email_content_context)
+
+            try:
+                Q.enqueue_call(func=mail.send_mail,
+                               args=(subject, msg_plain, sender, [recipient]),
+                               kwargs=({'html_message': msg_html, 'fail_silently': False})
+                               )
+            except Exception as e:
+                sys.stdout.write(str(e))
+
+        else:
+            pass
+
 
 def get_recipients(overpdk_list_all_stations):
     recipients_and_stations = {}
@@ -197,8 +209,6 @@ def get_recipients(overpdk_list_all_stations):
             recipients_and_stations.setdefault(address, set())
             recipients_and_stations[address].add((station_name_id, station_name))     
     return recipients_and_stations
-
-
 
 def main():
     sentinel = False
@@ -246,8 +256,16 @@ def main():
     cur.close()
     conn.close()
 
-#    if sentinel:
-#        send_email(overpdk_list_all_stations)
+    if sentinel:
+        send_email(overpdk_list_all_stations)
+    else:
+        try:
+            Q.enqueue_call(func=mail.send_mail,
+                           args=('Админу', 'все нормуль', 'moscowaircom@yandex.ru', ['boris.uwarow@gmail.com']),
+                           kwargs=({'html_message': '<p>Все чисто, братан!</p>', 'fail_silently': False})
+                           )
+        except Exception as e:
+            sys.stdout.write(str(e))
 
 
 if __name__ == '__main__':
