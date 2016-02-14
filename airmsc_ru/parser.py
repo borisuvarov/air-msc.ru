@@ -210,7 +210,7 @@ def get_recipients(overpdk_list_all_stations):
             if not temp_stations:
                 recipients_and_stations[address] = set()
             recipients_and_stations[address].update((station_name_id, station_name))
-    sys.stdout.write(recipients_and_stations)
+    sys.stdout.write(str(recipients_and_stations))
     return recipients_and_stations
 
 
