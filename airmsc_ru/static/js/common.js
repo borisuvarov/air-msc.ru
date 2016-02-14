@@ -382,15 +382,17 @@ var processFormUrl = '/process/',
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("login_form") + 1) {
                             $formAjaxContainer.html(data);
+                            $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»');
                         } else {
                             $messageBox.append(data);
                         }
                     })
                     .fail(function() {
                         $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
-                    });
-                $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»');
-                $('#login_form').on('submit', app.submitLoginForm);
+                    })
+                    .always(function() {
+                        $('#login_form').on('submit', app.submitLoginForm);
+                    })
             },
 
             submitMainForm: function(e) {
