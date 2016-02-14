@@ -207,8 +207,9 @@ def get_recipients(overpdk_list_all_stations):
         for recipient in recipients:
             address = recipient.email
             recipients_and_stations.setdefault(address, set())
-            recipients_and_stations[address].add((station_name_id, station_name))     
+        recipients_and_stations[address].add((station_name_id, station_name))
     return recipients_and_stations
+
 
 def main():
     sentinel = False
