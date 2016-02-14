@@ -164,9 +164,9 @@ def send_email(overpdk_list_all_stations):
             acthash = member.memberdata_set.get().activation_hash
             for station in stations:
                 if station_names:
-                    station_names = station_names + ", " + station[1]
+                    station_names = station_names + ", " + station
                 else:
-                    station_names = station_names + station[1]
+                    station_names = station_names + station
                 for station_and_poisons in overpdk_list_all_stations:
                     if station_and_poisons[0][0] in station:
                         poisons = station_and_poisons[1:]
