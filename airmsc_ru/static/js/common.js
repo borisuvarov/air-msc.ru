@@ -424,8 +424,7 @@ var processFormUrl = '/process/',
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("alert-success") + 1) {
                         $ajaxContainer.html(data);
-                        var $changeForm = $("#change-form");
-                        $changeForm.on('submit', app.submitChangeForm);
+                        $("#change-form").on('submit', app.submitChangeForm);
                     } else {
                         $messageBox.append(data);
                     }
@@ -441,8 +440,8 @@ var processFormUrl = '/process/',
             submitChangeForm: function(e) {
                 e.preventDefault();
                 $messageBox.empty();
-
-                var submitBtn = $changeForm.find('button[type="submit"]');
+                var $changeForm = $("#change-form"),
+                    submitBtn = $changeForm.find('button[type="submit"]');
                 submitBtn.attr('disabled', 'disabled');
                 var changeFormData = $changeForm.serialize();
 
