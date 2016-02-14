@@ -312,7 +312,6 @@ var processFormUrl = '/process/',
     loginUrl = '/login/',
     changeFormUrl = '/change/',
     $mainForm = $("#main_form"),
-    $loginForm = $('#login_form'),
     $login = $('#login'),
     $messageBox = $('#message_box'),
     $formAjaxContainer = $('.form-ajax-container');
@@ -390,11 +389,8 @@ var processFormUrl = '/process/',
                     .fail(function() {
                         $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
                     })
-                    .always(function() {
-                        submitBtn.removeAttr('disabled');
-                    });
                 $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
-                $loginForm.on('submit', app.submitLoginForm);
+                $('#login_form').on('submit', app.submitLoginForm);
             },
 
             submitMainForm: function(e) {
