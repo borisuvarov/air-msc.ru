@@ -160,7 +160,7 @@ def send_email(overpdk_list_all_stations):
             station_names = ""
             poison_names = ""
             stations = list(recipients_and_stations[recipient])
-            acthash = member.activation_hash
+            acthash = member.memberdata_set.get().activation_hash
             for station in stations:
                 if station_names:
                     station_names = station_names + ", " + station[1]
