@@ -154,6 +154,7 @@ def send_email(overpdk_list_all_stations):
     sender = 'moscowaircom@yandex.ru'
 
     recipients_and_stations = get_recipients(overpdk_list_all_stations)
+    sys.stdout.write(str(recipients_and_stations))
     for recipient in recipients_and_stations:
         member = Member.objects.get(email=recipient)
         if member.is_active:
@@ -211,7 +212,6 @@ def get_recipients(overpdk_list_all_stations):
                 if not temp_stations:
                     recipients_and_stations[address] = set()
                 recipients_and_stations[address].update((station_name_id, station_name))
-    sys.stdout.write(str(recipients_and_stations))
     return recipients_and_stations
 
 
