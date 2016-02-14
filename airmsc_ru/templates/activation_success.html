@@ -1,1 +1,5 @@
-<div id="message_box" style='text-align: center; width: 460px' class='alert alert-success'>Ваша подписка активирована, email-адрес подтверждён.</div>
+{% extends 'base.html' %}
+
+{% block message_box %}
+    <div id="message_box" style='text-align: center; width: 460px' class='alert alert-success'>Ваша подписка активирована, email-адрес подтверждён.</div>
+{% endblock %}
