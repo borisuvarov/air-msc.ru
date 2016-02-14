@@ -313,7 +313,6 @@ var processFormUrl = '/process/',
     $mainForm = $("#main_form"),
     $loginForm = $('#login_form'),
     $login = $('#login'),
-    $changeForm = $("#change-form"),
     $messageBox = $('#message_box'),
     $ajaxContainer = $('.ajax-container');
 
@@ -427,7 +426,7 @@ var processFormUrl = '/process/',
                         $ajaxContainer.html(data);
                         $('#change-button').on('click', function(e) {
                             e.preventDefault();
-                            $changeForm.on('submit', app.submitChangeForm);
+                            $("#change-form").on('submit', app.submitChangeForm);
                         });
                     } else {
                         $messageBox.append(data);
