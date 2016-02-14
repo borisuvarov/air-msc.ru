@@ -128,7 +128,6 @@ def user_login(request):
             return render(request, template)
     else:
         template = "login_failed.html"
-        sys.stdout.write('юзер из ноне')
         return render(request, template)
 
 
@@ -181,6 +180,7 @@ def process(request):
         try:
             new_member = Member.objects.create_user(email, password=password)
         except Exception as e:
+            new_member = None
             sys.stdout.write(str(e))
 
         if new_member:

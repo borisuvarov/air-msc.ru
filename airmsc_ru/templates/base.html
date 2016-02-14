@@ -8,105 +8,105 @@
     <title>air-msc.ru — уведомления о загрязнениях воздуха в Москве</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU"></script>
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link href="{% static "css/style.css" %}" rel="stylesheet">
     <script src="{% static "js/jquery.cookie.js" %}" ></script>
-    <script src="{% static "js/script.js" %}" ></script>
+    <script src="{% static "js/common.js" %}" ></script>
   </head>
 
   <body>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-7 col-sm-12" id="map"></div>
-        <div class="col-md-5 col-sm-12" id="first_slide" >
-          <h2 id="first_slide_text">Получайте на почту уведомления<br>
+        <div class="col-md-5 col-sm-12" id="right-column">
+          <h2 id="slogan">Получайте на почту уведомления<br>
           при загрязнении воздуха в вашем районе</h2>
+              {% block caption %}
+                <h2 id="help"><small>Выберите станции ГПБУ «<a href="http://www.mosecom.ru/air/air-today/">Мосэкомониторинг</a>», введите свой email и&nbsp;нажмите кнопку «Подписаться»</small></h2>
+              {% endblock caption %}
+            <section class="ajax-container">
+              {% block form %}
+                  <form id="main_form" class="form-inline" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      {% for field in form %}
+                        {{ field }}
+                      {% endfor %}
+                      <button type="submit" id="subscribe-button" class="btn btn-primary btn-lg">Подписаться</button>
+                      <p id="login"><a href="#">Подписались ранее и хотите изменить свой список станций?</a><p>
+                    </div>
+                    <div id="message_box"></div>
+                  </form>
 
-          {% block caption %}
-          <h2 id="help"><small>Выберите станции ГПБУ «<a href="http://www.mosecom.ru/air/air-today/">Мосэкомониторинг</a>», введите свой email и&nbsp;нажмите кнопку «Подписаться»</small></h2>
-          {% endblock caption %}
+                  <form id="login_form" class="form-inline hiddenform" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control input-lg" id="id_loginmail" maxlength="254" name="login" placeholder="Введите email" type="email" />
 
-          {% block form %}
-          <form id="main_form" class="form-inline" method="POST" action="">
-            {% csrf_token %}
-            <div class="form-group">
-              {% for field in form %}
-                {{ field }}
-              {% endfor %}
-              <button type="submit" id="subscribe-button" class="btn btn-primary btn-lg">Подписаться</button>
-              <p id="login"><a href="#">Подписались ранее и хотите изменить свой список станций?</a><p>
-            </div>
-            <div id="message_box"></div>
-          </form>
-          
-          <form id="login_form" class="form-inline hiddenform" method="POST" action="login/">
-            {% csrf_token %}
-            <div class="form-group">
-                <input class="form-control input-lg" id="id_loginmail" maxlength="254" name="login" placeholder="Введите email" type="email" />
-              
-                <input class="form-control input-lg" id="id_password" maxlength="200" name="password" placeholder="Введите пароль" type="password" />
-              
-              <button type="submit" id="login-button" class="btn btn-primary btn-lg">Войти</button>
-            </div>
-            <div id="message_box"></div>
-          </form>
-          {% endblock form %}
+                        <input class="form-control input-lg" id="id_password" maxlength="200" name="password" placeholder="Введите пароль" type="password" />
+
+                      <button type="submit" id="login-button" class="btn btn-primary btn-lg">Войти</button>
+                    </div>
+                    <div id="message_box"></div>
+                  </form>
+              {% endblock form %}
+            </section>
 
           {% block stations %}
-          <div class="row">
-            <div class="col-md-6">
-              <p><a href="" id="select_all"><strong>ВСЕ</a> / <a href="" id="unselect_all">НИ ОДНОЙ</strong></a></p>
-              <p class="unchosen" id="donskoyshabolovka">Донской (Шаболовка)</p>
-              <p class="unchosen" id="donskoychura">Донской (Чура)</p>
-              <p class="unchosen" id="danilovskiy">Даниловский</p>
-              <p class="unchosen" id="zapbirulovo">Западное Бирюлево</p>
-              <p class="unchosen" id="orekhovo">Орехово-Борисово Южное</p>
-              <p class="unchosen" id="tsarytsyno">Царицыно</p>
-              <p class="unchosen" id="konkovo">Коньково</p>
-              <p class="unchosen" id="akademicheskiy">Академический</p>
-              <p class="unchosen" id="gagarinskiy">Гагаринский</p>
-              <p class="unchosen" id="southbutovo">Южное Бутово</p>
-              <p class="unchosen" id="marinskiypark">Марьинский парк</p>
-              <p class="unchosen" id="lyblinogolovach">Люблино (Головачёва)</p>
-              <p class="unchosen" id="lublinosovkhoz">Люблино (Совхозная)</p>
-              <p class="unchosen" id="ryazanskiy">Рязанский</p>
-              <p class="unchosen" id="kapotnya">Капотня</p>
-              <p class="unchosen" id="pechatniki">Печатники</p>
-              <p class="unchosen" id="losiniyostrov">Лосиный остров</p>
-              <p class="unchosen" id="kosino">Косино</p>
-              <p class="unchosen" id="basmanniykazakova">Басманный (Казакова)</p>
-              <p class="unchosen" id="basmanniyspartak">Басманный (Спартаковская)</p>
-            </div>
-            
-            <div class="col-md-6">
-              <p class="unchosen" id="presnenskiy">Пресненский</p>
-              <p class="unchosen" id="tverskoy">Тверской</p>
-              <p class="unchosen" id="khamovniki">Хамовники</p>
-              <p class="unchosen" id="bogorodskoe">Богородское</p>
-              <p class="unchosen" id="southmedvedkovo">Южное Медведково</p>
-              <p class="unchosen" id="ostankinskiy">Останкинский</p>
-              <p class="unchosen" id="aeroport">Аэропорт</p>
-              <p class="unchosen" id="savelovskiy">Савеловский</p>
-              <p class="unchosen" id="dmitrovskiy">Дмитровский</p>
-              <p class="unchosen" id="sokol">Сокол</p>
-              <p class="unchosen" id="pokrovskoestreshnevo">Покровское-Стрешнево</p>
-              <p class="unchosen" id="northtushino">Северное Тушино</p>
-              <p class="unchosen" id="khoroshevomnevniki">Хорошево-Мневники</p>
-              <p class="unchosen" id="ramenki">Раменки</p>
-              <p class="unchosen" id="troparevonikulino">Тропарево-Никулино</p>
-              <p class="unchosen" id="mozhaisky">Можайский</p>
-              <p class="unchosen" id="dorogomilovo">Дорогомилово</p>
-              <p class="unchosen" id="scherbinka">Щербинка</p>
-              <p class="unchosen" id="salarievo">Саларьево (Московский)</p>
-              <p class="unchosen" id="kozhuhovo">Кожухово</p>
-              <p class="unchosen" id="meschansky">Мещанский</p>
-            </div>
-          </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><a href="#" id="select_all"><strong>ВСЕ</strong></a> / <a href="#" id="unselect_all"><strong>НИ ОДНОЙ</strong></a></p>
+                  <p class="unchosen" id="donskoyshabolovka">Донской (Шаболовка)</p>
+                  <p class="unchosen" id="donskoychura">Донской (Чура)</p>
+                  <p class="unchosen" id="danilovskiy">Даниловский</p>
+                  <p class="unchosen" id="zapbirulovo">Западное Бирюлево</p>
+                  <p class="unchosen" id="orekhovo">Орехово-Борисово Южное</p>
+                  <p class="unchosen" id="tsarytsyno">Царицыно</p>
+                  <p class="unchosen" id="konkovo">Коньково</p>
+                  <p class="unchosen" id="akademicheskiy">Академический</p>
+                  <p class="unchosen" id="gagarinskiy">Гагаринский</p>
+                  <p class="unchosen" id="southbutovo">Южное Бутово</p>
+                  <p class="unchosen" id="marinskiypark">Марьинский парк</p>
+                  <p class="unchosen" id="lyblinogolovach">Люблино (Головачёва)</p>
+                  <p class="unchosen" id="lublinosovkhoz">Люблино (Совхозная)</p>
+                  <p class="unchosen" id="ryazanskiy">Рязанский</p>
+                  <p class="unchosen" id="kapotnya">Капотня</p>
+                  <p class="unchosen" id="pechatniki">Печатники</p>
+                  <p class="unchosen" id="losiniyostrov">Лосиный остров</p>
+                  <p class="unchosen" id="kosino">Косино</p>
+                  <p class="unchosen" id="basmanniykazakova">Басманный (Казакова)</p>
+                  <p class="unchosen" id="basmanniyspartak">Басманный (Спартаковская)</p>
+                </div>
+
+                <div class="col-md-6">
+                  <p class="unchosen" id="presnenskiy">Пресненский</p>
+                  <p class="unchosen" id="tverskoy">Тверской</p>
+                  <p class="unchosen" id="khamovniki">Хамовники</p>
+                  <p class="unchosen" id="bogorodskoe">Богородское</p>
+                  <p class="unchosen" id="southmedvedkovo">Южное Медведково</p>
+                  <p class="unchosen" id="ostankinskiy">Останкинский</p>
+                  <p class="unchosen" id="aeroport">Аэропорт</p>
+                  <p class="unchosen" id="savelovskiy">Савеловский</p>
+                  <p class="unchosen" id="dmitrovskiy">Дмитровский</p>
+                  <p class="unchosen" id="sokol">Сокол</p>
+                  <p class="unchosen" id="pokrovskoestreshnevo">Покровское-Стрешнево</p>
+                  <p class="unchosen" id="northtushino">Северное Тушино</p>
+                  <p class="unchosen" id="khoroshevomnevniki">Хорошево-Мневники</p>
+                  <p class="unchosen" id="ramenki">Раменки</p>
+                  <p class="unchosen" id="troparevonikulino">Тропарево-Никулино</p>
+                  <p class="unchosen" id="mozhaisky">Можайский</p>
+                  <p class="unchosen" id="dorogomilovo">Дорогомилово</p>
+                  <p class="unchosen" id="scherbinka">Щербинка</p>
+                  <p class="unchosen" id="salarievo">Саларьево (Московский)</p>
+                  <p class="unchosen" id="kozhuhovo">Кожухово</p>
+                  <p class="unchosen" id="meschansky">Мещанский</p>
+                </div>
+              </div>
           {% endblock stations %}
         </div>
       </div>
-      <div id="footer">Собрана почасовая статистика за {{ days }} дней<br><br>Код сайта доступен на <a href="https://github.com/borisuvarov">GitHub</a></div>
+      <div id="footer">Собрана почасовая статистика за {{ days }} суток</div>
     </div>
   </body>
 </html>

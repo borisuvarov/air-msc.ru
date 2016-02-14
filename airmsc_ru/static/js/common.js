@@ -2,7 +2,7 @@ ymaps.ready(init);
 
 var myMap,
     app,
-    subscribitions_list,
+    subscribitionsList,
     donskoyshabolovka,
     donskoychura,
     danilovskiy,
@@ -53,210 +53,209 @@ function init() {
 
     meschansky = new ymaps.Placemark([55.774705, 37.627355], {
         hintContent: 'Мещанский',
-        id: 'meschansky',
+        id: 'meschansky'
     });
 
     donskoyshabolovka = new ymaps.Placemark([55.714825, 37.604637], {
         hintContent: 'Донской (Шаболовка)',
-        id: 'donskoyshabolovka',
+        id: 'donskoyshabolovka'
     });
 
     basmanniykazakova = new ymaps.Placemark([55.762819, 37.663782], {
         hintContent: 'Басманный (Казакова)',
-        id: 'basmanniykazakova',
+        id: 'basmanniykazakova'
 
     });
 
     tverskoy = new ymaps.Placemark([55.774922, 37.594225], {
         hintContent: 'Тверской',
-        id: 'tverskoy',
+        id: 'tverskoy'
     });
 
     presnenskiy = new ymaps.Placemark([55.759051, 37.595905], {
         hintContent: 'Пресненский',
-        id: 'presnenskiy',
+        id: 'presnenskiy'
     });
 
     donskoychura = new ymaps.Placemark([55.70005, 37.609317], {
         hintContent: 'Донской (Чура)',
-        id: 'donskoychura',
+        id: 'donskoychura'
     });
 
     danilovskiy = new ymaps.Placemark([55.707552, 37.66291], {
         hintContent: 'Даниловский',
-        id: 'danilovskiy',
+        id: 'danilovskiy'
     });
 
     zapbirulovo = new ymaps.Placemark([55.579653, 37.645842], {
         hintContent: 'Западное Бирюлево',
-        id: 'zapbirulovo',
+        id: 'zapbirulovo'
     });
 
     orekhovo = new ymaps.Placemark([55.605541, 37.751134], {
         hintContent: 'Орехово-Борисово Южное',
-        id: 'orekhovo',
+        id: 'orekhovo'
     });
 
     tsarytsyno = new ymaps.Placemark([55.635243, 37.658122], {
         hintContent: 'Царицыно',
-        id: 'tsarytsyno',
+        id: 'tsarytsyno'
     });
 
     konkovo = new ymaps.Placemark([55.646878, 37.552193], {
         hintContent: 'Коньково',
-        id: 'konkovo',
+        id: 'konkovo'
     });
 
     akademicheskiy = new ymaps.Placemark([55.679961, 37.583607], {
         hintContent: 'Академический',
-        id: 'akademicheskiy',
+        id: 'akademicheskiy'
     });
 
     gagarinskiy = new ymaps.Placemark([55.708785, 37.582403], {
         hintContent: 'Гагаринский',
-        id: 'gagarinskiy',
+        id: 'gagarinskiy'
     });
 
     southbutovo = new ymaps.Placemark([55.535707, 37.579394], {
         hintContent: 'Южное Бутово',
-        id: 'southbutovo',
+        id: 'southbutovo'
     });
 
     marinskiypark = new ymaps.Placemark([55.652136, 37.750316], {
         hintContent: 'Марьинский парк',
-        id: 'marinskiypark',
+        id: 'marinskiypark'
     });
 
     lyblinogolovach = new ymaps.Placemark([55.67622, 37.817933], {
         hintContent: 'Люблино (Головачёва)',
-        id: 'lyblinogolovach',
+        id: 'lyblinogolovach'
     });
 
     lublinosovkhoz = new ymaps.Placemark([55.66927, 37.742097], {
         hintContent: 'Люблино (Совхозная)',
-        id: 'lublinosovkhoz',
+        id: 'lublinosovkhoz'
     });
 
     ryazanskiy = new ymaps.Placemark([55.720322, 37.795987], {
         hintContent: 'Рязанский',
-        id: 'ryazanskiy',
+        id: 'ryazanskiy'
     });
 
     kapotnya = new ymaps.Placemark([55.641869, 37.801377], {
         hintContent: 'Капотня',
-        id: 'kapotnya',
+        id: 'kapotnya'
     });
 
     pechatniki = new ymaps.Placemark([55.678981, 37.717231], {
         hintContent: 'Печатники',
-        id: 'pechatniki',
+        id: 'pechatniki'
     });
 
     losiniyostrov = new ymaps.Placemark([55.859443, 37.84181], {
         hintContent: 'Лосиный остров',
-        id: 'losiniyostrov',
+        id: 'losiniyostrov'
     });
 
     kosino = new ymaps.Placemark([56.002269, 37.836995], {
         hintContent: 'Косино',
-        id: 'kosino',
+        id: 'kosino'
     });
 
     kozhuhovo = new ymaps.Placemark([55.72305, 37.908393], {
         hintContent: 'Кожухово',
-        id: 'kozhuhovo',
+        id: 'kozhuhovo'
     });
 
     basmanniyspartak = new ymaps.Placemark([55.775636, 37.684587], {
         hintContent: 'Басманный (Спартаковская)',
-        id: 'basmanniyspartak',
+        id: 'basmanniyspartak'
     });
 
     khamovniki = new ymaps.Placemark([55.719749, 37.569809], {
         hintContent: 'Хамовники',
-        id: 'khamovniki',
+        id: 'khamovniki'
     });
 
     bogorodskoe = new ymaps.Placemark([55.814108, 37.717321], {
         hintContent: 'Богородское',
-        id: 'bogorodskoe',
+        id: 'bogorodskoe'
     });
 
     southmedvedkovo = new ymaps.Placemark([55.873935, 37.639491], {
         hintContent: 'Южное Медведково',
-        id: 'southmedvedkovo',
+        id: 'southmedvedkovo'
     });
 
     ostankinskiy = new ymaps.Placemark([55.818463, 37.614752], {
         hintContent: 'Останкинский',
-        id: 'ostankinskiy',
+        id: 'ostankinskiy'
     });
 
     aeroport = new ymaps.Placemark([55.802341, 37.529151], {
         hintContent: 'Аэропорт',
-        id: 'aeroport',
+        id: 'aeroport'
     });
 
     savelovskiy = new ymaps.Placemark([55.792696, 37.57802], {
         hintContent: 'Савёловский',
-        id: 'savelovskiy',
+        id: 'savelovskiy'
     });
 
     dmitrovskiy = new ymaps.Placemark([55.891936, 37.537865], {
         hintContent: 'Дмитровский',
-        id: 'dmitrovskiy',
+        id: 'dmitrovskiy'
     });
 
     sokol = new ymaps.Placemark([55.814259, 37.488619], {
         hintContent: 'Сокол',
-        id: 'sokol',
+        id: 'sokol'
     });
 
     pokrovskoestreshnevo = new ymaps.Placemark([55.914625, 37.730446], {
         hintContent: 'Покровское-Стрешнево',
-        id: 'pokrovskoestreshnevo',
+        id: 'pokrovskoestreshnevo'
     });
 
     northtushino = new ymaps.Placemark([55.855558, 37.423419], {
         hintContent: 'Северное Тушино',
-        id: 'northtushino',
+        id: 'northtushino'
     });
 
     khoroshevomnevniki = new ymaps.Placemark([55.829987, 37.308552], {
         hintContent: 'Хорошево-Мневники',
-        id: 'khoroshevomnevniki',
+        id: 'khoroshevomnevniki'
     });
 
     ramenki = new ymaps.Placemark([55.702987, 37.53093], {
         hintContent: 'Раменки',
-        id: 'ramenki',
+        id: 'ramenki'
     });
 
     troparevonikulino = new ymaps.Placemark([55.658484, 37.471345], {
         hintContent: 'Тропарёво-Никулино',
-        id: 'troparevonikulino',
+        id: 'troparevonikulino'
     });
 
     mozhaisky = new ymaps.Placemark([55.720271, 37.405732], {
         hintContent: 'Можайский',
-        id: 'mozhaisky',
+        id: 'mozhaisky'
     });
 
     dorogomilovo = new ymaps.Placemark([55.737811, 37.533508], {
         hintContent: 'Дорогомилово',
-        id: 'dorogomilovo',
+        id: 'dorogomilovo'
     });
 
     scherbinka = new ymaps.Placemark([55.506954, 37.563269], {
         hintContent: 'Щербинка',
-        id: 'scherbinka',
+        id: 'scherbinka'
     });
 
     salarievo = new ymaps.Placemark([55.61962, 37.430777], {
         hintContent: 'Саларьево',
-        id: 'salarievo',
+        id: 'salarievo'
     });
-
 
     myMap.controls.add('zoomControl');
 
@@ -302,63 +301,60 @@ function init() {
     myMap.geoObjects.add(scherbinka);
     myMap.geoObjects.add(salarievo);
 
-
     myMap.geoObjects.events.add('click', function(e) {
         app.selectOneStation(e);
     });
 
-};
+}
 
-
-var url_var = '/process/';
-var form = $("#main_form");
-
+var processFormUrl = '/process/',
+    loginFormUrl = 'login',
+    $mainForm = $("#main_form"),
+    $loginForm = $('#login_form'),
+    $login = $('#login'),
+    $changeForm = $("#change-form"),
+    $messageBox = $('#message_box'),
+    $ajaxContainer = $('.ajax-container');
 
 (function() {
     app = {
             initialize: function() {
                 this.setUpListeners();
-                subscribitions_list = [];
+                subscribitionsList = [];
             },
 
             setUpListeners: function() {
                 $(document).ready(function() {
-                    $('#main_form').on('submit', app.submitForm);
+                    $mainForm.on('submit', app.submitMainForm);
+                    $loginForm.on('submit', app.submitLoginForm);
                     $('#select_all').on('click', app.selectStations);
                     $('#unselect_all').on('click', app.unselectStations);
-                    $('#login').on('click', function() {
-                        $('#main_form').hide();
-                        $('#login').hide();
-                        $('#login_form').show();
+                    $login.on('click', function() {
+                        $mainForm.hide();
+                        $login.hide();
+                        $loginForm.show();
                         $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
                     });
-
-                    $('#change-button').on('click', function() {
-                        url_var = '/change/';
-                        $('#select_all').on('click', app.selectStations);
-                        $('#unselect_all').on('click', app.unselectStations);
-                        form = $("#change-form");
-                        form.on('submit', app.submitForm);
+                    $('#change-button').on('click', function(e) {
+                        e.preventDefault();
+                        $changeForm.on('submit', app.submitMainForm);
                     });
-
-
                 });
             },
 
-
             selectOneStation: function(e) {
-                stationId = e.get('target')['properties'].get('id');
-                DOMstationId = '#' + stationId;
+                var stationId = e.get('target')['properties'].get('id'),
+                    DOMstationId = '#' + stationId;
                 $(DOMstationId).removeClass('unchosen').addClass('chosen');
-                if (subscribitions_list.indexOf(stationId) < 0) {
-                    subscribitions_list.push(stationId);
-                };
+                if (subscribitionsList.indexOf(stationId) < 0) {
+                    subscribitionsList.push(stationId);
+                }
             },
 
             selectStations: function(e) {
                 e.preventDefault();
                 $("p[class='unchosen']").removeClass('unchosen').addClass('chosen');
-                subscribitions_list = ['donskoyshabolovka', 'donskoychura', 'danilovskiy',
+                subscribitionsList = ['donskoyshabolovka', 'donskoychura', 'danilovskiy',
                     'zapbirulovo', 'orekhovo', 'tsarytsyno', 'konkovo', 'akademicheskiy', 'gagarinskiy',
                     'southbutovo', 'marinskiypark', 'lyblinogolovach', 'lublinosovkhoz', 'ryazanskiy',
                     'kapotnya', 'pechatniki', 'losiniyostrov', 'kosino', 'kozhuhovo', 'meschansky',
@@ -372,54 +368,78 @@ var form = $("#main_form");
             unselectStations: function(e) {
                 e.preventDefault();
                 $("p[class='chosen']").removeClass('chosen').addClass('unchosen');
-                subscribitions_list = [];
+                subscribitionsList = [];
             },
 
 
-
-
-            submitForm: function(e) {
-                e.preventDefault();
-                var message_box = $('#message_box');
-                message_box.empty();
-
-                if (subscribitions_list.length === 0) {
-                    message_box.append('<div id="error_message" class="alert alert-danger">Выберите хотя бы одну станцию!</div>');
-                } else {
-
-                    submitBtn = form.find('button[type="submit"]');
-                    submitBtn.attr('disabled', 'disabled');
-
-                    var str = $("#main_form").serialize() + "&stations=" + subscribitions_list.toString();
-
-                    $.ajaxSetup({
-                        beforeSend: function(xhr, settings) {
+            loadAjax: function (url, data) {
+                $.ajaxSetup({
+                        beforeSend: function(xhr) {
                             xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
                         }
                     });
 
-                    $.ajax({
-                            url: url_var,
-                            type: 'POST',
-                            data: str
-                        })
-                        .done(function(msg) {
-                            var check_success = "alert-success";
-                            if (msg.indexOf(check_success) + 1) {
-                                $("#main_form").html(msg);
+                return $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: data
+                    })
+            },
+
+            submitMainForm: function(e) {
+                e.preventDefault();
+                $messageBox.empty();
+
+                if (subscribitionsList.length === 0) {
+                    $messageBox.append('<div id="error_message" class="alert alert-danger">Выберите хотя бы одну станцию!</div>');
+                } else {
+                    var submitBtn = $mainForm.find('button[type="submit"]');
+                    submitBtn.attr('disabled', 'disabled');
+                    var mainFormData = $mainForm.serialize() + "&stations=" + subscribitionsList.toString();
+
+                    var ajaxResponse = app.loadAjax(processFormUrl, mainFormData);
+
+                    ajaxResponse.done(function( data ) {
+                        if (data.indexOf("alert-success") + 1) {
+                                $ajaxContainer.html(data);
                             } else {
-                                message_box.append(msg);
+                                $messageBox.append(data);
                             }
                         })
-                        .fail(function(msg) {
-                            message_box.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
+                        .fail(function() {
+                            $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
                         })
                         .always(function() {
                             submitBtn.removeAttr('disabled');
                         });
                 }
             },
-    },
+
+            submitLoginForm: function(e) {
+                e.preventDefault();
+                $messageBox.empty();
+
+                var submitBtn = $loginForm.find('button[type="submit"]');
+                submitBtn.attr('disabled', 'disabled');
+                var loginFormData = $loginForm.serialize();
+
+                var ajaxResponse = app.loadAjax(loginFormUrl, loginFormData);
+                ajaxResponse.done(function( data ) {
+                    if (data.indexOf("alert-success") + 1) {
+                            $ajaxContainer.html(data);
+                        } else {
+                            $messageBox.append(data);
+                        }
+                    })
+                    .fail(function() {
+                        $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
+                    })
+                    .always(function() {
+                        submitBtn.removeAttr('disabled');
+                    });
+            }
+
+    };
 
     app.initialize();
 

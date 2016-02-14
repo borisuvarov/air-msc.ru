@@ -1,19 +1,13 @@
-{% extends "base.html" %}
+<div id='alert-login' class='alert alert-success'>
+    Вы залогинились. Список станций обнулен.
+    Выберите станции заново и нажмите «Изменить подписку».
+</div>
 
-{% block caption %}
-            <div id='alert-login' class='alert alert-success'>
-                Вы залогинились. Список станций обнулен.
-                Выберите станции заново и нажмите «Изменить подписку».
-            </div>
-{% endblock caption %}
+<form id="change-form" class="form-inline" method="POST" action="change/">
+    {% csrf_token %}
+    <div class="form-group">
+        <button type="submit" id="change-button" class="btn btn-primary btn-lg">Изменить подписку</button>
+    </div>
+    <div id="message_box"></div>
+</form>
 
-{% block form %}
-          <form id="change-form" class="form-inline" method="POST" action="change/">
-            {% csrf_token %}
-            <div class="form-group">
-
-              <button type="submit" id="change-button" class="btn btn-primary btn-lg">Изменить подписку</button>
-            </div>
-            <div id="message_box"></div>
-          </form>
-{% endblock form %}
