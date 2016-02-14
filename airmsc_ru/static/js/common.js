@@ -337,10 +337,6 @@ var processFormUrl = '/process/',
                         $loginForm.show();
                         $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
                     });
-                    $('#change-button').on('click', function(e) {
-                        e.preventDefault();
-                        $changeForm.on('submit', app.submitChangeForm);
-                    });
                 });
             },
 
@@ -428,10 +424,14 @@ var processFormUrl = '/process/',
                 var ajaxResponse = app.loadAjax(loginFormUrl, loginFormData);
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("alert-success") + 1) {
-                            $ajaxContainer.html(data);
-                        } else {
-                            $messageBox.append(data);
-                        }
+                        $ajaxContainer.html(data);
+                        $('#change-button').on('click', function(e) {
+                            e.preventDefault();
+                            $changeForm.on('submit', app.submitChangeForm);
+                        });
+                    } else {
+                        $messageBox.append(data);
+                    }
                     })
                     .fail(function() {
 			            $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
