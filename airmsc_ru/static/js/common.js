@@ -428,7 +428,8 @@ var processFormUrl = '/process/',
                 e.preventDefault();
                 $messageBox.empty();
 
-                var submitBtn = $loginForm.find('button[type="submit"]');
+                var $loginForm = $('#login_form'),
+                    submitBtn = $loginForm.find('button[type="submit"]');
                 submitBtn.attr('disabled', 'disabled');
                 var loginFormData = $loginForm.serialize();
 
