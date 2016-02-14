@@ -198,6 +198,7 @@ def send_email(overpdk_list_all_stations):
 
 def get_recipients(overpdk_list_all_stations):
     recipients_and_stations = {}
+    sys.stdout.write(str(overpdk_list_all_stations))
     for station_data in overpdk_list_all_stations:
         station_name_id = station_data[0][1]
         station_name = station_data[0][0]
