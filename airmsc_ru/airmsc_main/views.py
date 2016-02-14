@@ -132,7 +132,7 @@ def unsubscribe(request):
 def home(request):
     form = MemberModelForm(request.POST or None)
     template = "base.html"
-    context = RequestContext(request, {"form": form})
+    context = {"form": form}
     return render(request, template, context)
 
 
