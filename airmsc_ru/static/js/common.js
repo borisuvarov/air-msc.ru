@@ -424,10 +424,7 @@ var processFormUrl = '/process/',
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("alert-success") + 1) {
                         $ajaxContainer.html(data);
-                        $('#change-button').on('click', function(e) {
-                            e.preventDefault();
-                            $("#change-form").on('submit', app.submitChangeForm);
-                        });
+                        $("#change-form").on('submit', app.submitChangeForm);
                     } else {
                         $messageBox.append(data);
                     }
