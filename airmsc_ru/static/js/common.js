@@ -329,7 +329,8 @@ var processFormUrl = '/process/',
                     $loginForm.on('submit', app.submitLoginForm);
                     $('#select_all').on('click', app.selectStations);
                     $('#unselect_all').on('click', app.unselectStations);
-                    $login.on('click', function() {
+                    $login.on('click', function(e) {
+                        e.preventDefault();
                         $mainForm.hide();
                         $login.hide();
                         $loginForm.show();
@@ -432,7 +433,8 @@ var processFormUrl = '/process/',
                         }
                     })
                     .fail(function() {
-                        $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
+                        console.log('fail');
+			$messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
                     })
                     .always(function() {
                         submitBtn.removeAttr('disabled');
