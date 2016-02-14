@@ -308,13 +308,14 @@ function init() {
 }
 
 var processFormUrl = '/process/',
-    loginFormUrl = '/login/',
+    loginFormUrl = '/loginform/',
+    loginUrl = '/login/',
     changeFormUrl = '/change/',
     $mainForm = $("#main_form"),
     $loginForm = $('#login_form'),
     $login = $('#login'),
     $messageBox = $('#message_box'),
-    $ajaxContainer = $('.ajax-container');
+    $formAjaxContainer = $('.form-ajax-container');
 
 (function() {
     app = {
@@ -326,16 +327,9 @@ var processFormUrl = '/process/',
             setUpListeners: function() {
                 $(document).ready(function() {
                     $mainForm.on('submit', app.submitMainForm);
-                    $loginForm.on('submit', app.submitLoginForm);
                     $('#select_all').on('click', app.selectStations);
                     $('#unselect_all').on('click', app.unselectStations);
-                    $login.on('click', function(e) {
-                        e.preventDefault();
-                        $mainForm.hide();
-                        $login.hide();
-                        $loginForm.show();
-                        $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
-                    });
+                    $login.on('click', app.loadLoginForm);
                 });
             },
 
@@ -383,6 +377,13 @@ var processFormUrl = '/process/',
                     })
             },
 
+            loadLoginForm: function(e) {
+                e.preventDefault();
+                app.loadAjax(loginFormUrl, '');
+                $('.small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
+                $loginForm.on('submit', app.submitLoginForm);
+            },
+
             submitMainForm: function(e) {
                 e.preventDefault();
                 $messageBox.empty();
@@ -398,7 +399,7 @@ var processFormUrl = '/process/',
 
                     ajaxResponse.done(function( data ) {
                         if (data.indexOf("alert-success") + 1) {
-                                $ajaxContainer.html(data);
+                                $formAjaxContainer.html(data);
                             } else {
                                 $messageBox.append(data);
                             }
@@ -420,10 +421,10 @@ var processFormUrl = '/process/',
                 submitBtn.attr('disabled', 'disabled');
                 var loginFormData = $loginForm.serialize();
 
-                var ajaxResponse = app.loadAjax(loginFormUrl, loginFormData);
+                var ajaxResponse = app.loadAjax(loginUrl, loginFormData);
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("alert-success") + 1) {
-                        $ajaxContainer.html(data);
+                        $formAjaxContainer.html(data);
                         $("#change-form").on('submit', app.submitChangeForm);
                     } else {
                         $messageBox.append(data);
@@ -448,7 +449,7 @@ var processFormUrl = '/process/',
                 var ajaxResponse = app.loadAjax(changeFormUrl, changeFormData);
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("alert-success") + 1) {
-                            $ajaxContainer.html(data);
+                            $formAjaxContainer.html(data);
                         } else {
                             $messageBox.append(data);
                         }

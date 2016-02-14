@@ -19,12 +19,11 @@
       <div class="row">
         <div class="col-md-7 col-sm-12" id="map"></div>
         <div class="col-md-5 col-sm-12" id="right-column">
-          <h2 id="slogan">Получайте на почту уведомления<br>
-          при загрязнении воздуха в вашем районе</h2>
-              {% block caption %}
-                <h2 id="help"><small>Выберите станции ГПБУ «<a href="http://www.mosecom.ru/air/air-today/">Мосэкомониторинг</a>», введите свой email и&nbsp;нажмите кнопку «Подписаться»</small></h2>
-              {% endblock caption %}
-            <section class="ajax-container">
+          <h2 id="slogan">Получайте на почту уведомления<br>при загрязнении воздуха в вашем районе</h2>
+          {% block caption %}
+            <h2 id="help" class="small">Выберите станции ГПБУ «<a href="http://www.mosecom.ru/air/air-today/">Мосэкомониторинг</a>», введите свой email и&nbsp;нажмите кнопку «Подписаться»</h2>
+          {% endblock caption %}
+          <section class="form-ajax-container">
               {% block form %}
                   <form id="main_form" class="form-inline" method="POST" action="">
                     {% csrf_token %}
@@ -36,19 +35,8 @@
                       <a href="#" id="login">Подписались ранее и хотите изменить свой список станций?</a>
                     </div>
                   </form>
-
-                  <form id="login_form" class="form-inline hiddenform" method="POST" action="">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input class="form-control input-lg" id="id_loginmail" maxlength="254" name="login" placeholder="Введите email" type="email" />
-
-                        <input class="form-control input-lg" id="id_password" maxlength="200" name="password" placeholder="Введите пароль" type="password" />
-
-                      <button type="submit" id="login-button" class="btn btn-primary btn-lg">Войти</button>
-                    </div>
-                  </form>
               {% endblock form %}
-            </section>
+          </section>
             {% block message_box %}
                 <div id="message_box"></div>
             {% endblock %}

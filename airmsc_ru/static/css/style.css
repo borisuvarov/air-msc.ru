@@ -13,10 +13,6 @@
 
 }
 
-.hiddenform {
-	display: none;
-}
-
 #subscribe-button, #login-button {
 	display: block;
 	margin-top: 5px;
@@ -49,7 +45,7 @@
 	padding-top: 15px;
 }
 
-#help {
+.small {
 	line-height: 0.8em;
 }
 

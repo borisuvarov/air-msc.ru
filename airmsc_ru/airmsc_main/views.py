@@ -135,6 +135,11 @@ def home(request):
     return render(request, template, context)
 
 
+def login_form(request):
+    template = "login_form.html"
+    return render(request, template)
+
+
 def process(request):
     true_list = request.POST.dict()['stations'].split(",")
     for key in list(clean_subscribitions_dict.keys()):
