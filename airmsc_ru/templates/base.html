@@ -49,7 +49,9 @@
                   </form>
               {% endblock form %}
             </section>
-            <div id="message_box"></div>
+            {% block message_box %}
+                <div id="message_box"></div>
+            {% endblock %}
 
           {% block stations %}
               <div class="row">
