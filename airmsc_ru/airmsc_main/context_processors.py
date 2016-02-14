@@ -33,4 +33,4 @@ counter = UptimeCounter()
 
 
 def add_uptime_to_context(request):
-    return request.update({'days': counter.uptime})
+    return {'days': counter.uptime}
