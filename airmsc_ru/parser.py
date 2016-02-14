@@ -198,19 +198,19 @@ def send_email(overpdk_list_all_stations):
 
 def get_recipients(overpdk_list_all_stations):
     recipients_and_stations = {}
-    sys.stdout.write(str(overpdk_list_all_stations))
     for station_data in overpdk_list_all_stations:
-        station_name_id = station_data[0][1]
-        station_name = station_data[0][0]
-        query_parameter = 'memberdata__' + station_name_id
-        filter_parameter = {query_parameter: True}
-        recipients = Member.objects.filter(**filter_parameter)
-        for recipient in recipients:
-            address = recipient.email
-            temp_stations = recipients_and_stations.get(address)
-            if not temp_stations:
-                recipients_and_stations[address] = set()
-            recipients_and_stations[address].update((station_name_id, station_name))
+        if len(station_data) > 1:
+            station_name_id = station_data[0][1]
+            station_name = station_data[0][0]
+            query_parameter = 'memberdata__' + station_name_id
+            filter_parameter = {query_parameter: True}
+            recipients = Member.objects.filter(**filter_parameter)
+            for recipient in recipients:
+                address = recipient.email
+                temp_stations = recipients_and_stations.get(address)
+                if not temp_stations:
+                    recipients_and_stations[address] = set()
+                recipients_and_stations[address].update((station_name_id, station_name))
     sys.stdout.write(str(recipients_and_stations))
     return recipients_and_stations
 
