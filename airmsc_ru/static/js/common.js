@@ -379,8 +379,21 @@ var processFormUrl = '/process/',
 
             loadLoginForm: function(e) {
                 e.preventDefault();
-                app.loadAjax(loginFormUrl, '');
-                $('.small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
+                var ajaxResponse = app.loadAjax(loginFormUrl, '');
+                ajaxResponse.done(function( data ) {
+                    if (data.indexOf("login_form") + 1) {
+                            $formAjaxContainer.html(data);
+                        } else {
+                            $messageBox.append(data);
+                        }
+                    })
+                    .fail(function() {
+                        $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
+                    })
+                    .always(function() {
+                        submitBtn.removeAttr('disabled');
+                    });
+                $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
                 $loginForm.on('submit', app.submitLoginForm);
             },
 
