@@ -1,3 +1,9 @@
+import hashlib
+import random
+import sys
+from redis import Redis
+from rq import Queue
+
 from django.shortcuts import render
 from .forms import MemberModelForm
 from .models import Member, MemberData
@@ -6,11 +12,8 @@ from django.template import Context
 from django.core import mail
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-import hashlib
-import random
-import sys
-from redis import Redis
-from rq import Queue
+from django.template import RequestContext
+
 
 Q = Queue(connection=Redis())
 
@@ -122,14 +125,14 @@ def unsubscribe(request):
 
     form = MemberModelForm(request.POST or None)
     template = "unsubscribe_success.html"
-    context = {"form": form}
+    context = RequestContext(request, {"form": form})
     return render(request, template, context)
 
 
 def home(request):
     form = MemberModelForm(request.POST or None)
     template = "base.html"
-    context = {"form": form}
+    context = RequestContext(request, {"form": form})
     return render(request, template, context)
 
 
@@ -227,5 +230,5 @@ def process(request):
             return render(request, template)
 
     template = "form_errors.html"
-    context = {"form": form}
+    context = RequestContext(request, {"form": form})
     return render(request, template, context)
