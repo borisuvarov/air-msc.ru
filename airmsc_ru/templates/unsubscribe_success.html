@@ -1,13 +1,22 @@
-<p id="help"></p>
-<div style='text-align: center; width: 460px' class='alert alert-success'>Вы отписались от всех уведомлений, ваш email удален из базы. Теперь вы, если хотите, можете подписаться на уведомления заново, выбрав другие станции мониторинга.</div>
-<form id="main_form" class="form-inline" method="POST" action="">
-    {% csrf_token %}
-    <div class="form-group">
-        {% for field in form %}
-            {{ field }}
-        {% endfor %}
-        <button type="submit" class="btn btn-primary btn-lg">Подписаться</button>
-    </div>
-    <div id="message_box"></div>
-</form>
+{% extends 'base.html' %}
+
+{% block caption %}{% endblock %}
+
+{% block form %}
+    <form id="main_form" class="form-inline" method="POST" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            {% for field in form %}
+                {{ field }}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary btn-lg">Подписаться</button>
+        </div>
+        <div id="message_box"></div>
+    </form>
+{% endblock %}
+
+{% block message_box %}
+    <div style='text-align: center; width: 460px' class='alert alert-success'>Вы отписались от всех уведомлений, ваш email удален из базы. Теперь вы, если хотите, можете подписаться на уведомления заново, выбрав другие станции мониторинга.</div>
+{% endblock %}
+
 
