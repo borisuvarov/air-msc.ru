@@ -308,7 +308,7 @@ function init() {
 }
 
 var processFormUrl = '/process/',
-    loginFormUrl = 'login',
+    loginFormUrl = '/login/',
     $mainForm = $("#main_form"),
     $loginForm = $('#login_form'),
     $login = $('#login'),
