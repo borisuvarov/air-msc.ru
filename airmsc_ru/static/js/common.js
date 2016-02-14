@@ -433,8 +433,7 @@ var processFormUrl = '/process/',
                         }
                     })
                     .fail(function() {
-                        console.log('fail');
-			$messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
+			            $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
                     })
                     .always(function() {
                         submitBtn.removeAttr('disabled');
