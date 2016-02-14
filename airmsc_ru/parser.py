@@ -155,7 +155,7 @@ def send_email(overpdk_list_all_stations):
 
     recipients_and_stations = get_recipients(overpdk_list_all_stations)
     for recipient in recipients_and_stations:
-        member = Member.objects.get(username=recipient)
+        member = Member.objects.get(email=recipient)
         if member.is_active:
             station_names = ""
             poison_names = ""
