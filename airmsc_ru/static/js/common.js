@@ -309,6 +309,7 @@ function init() {
 
 var processFormUrl = '/process/',
     loginFormUrl = '/login/',
+    changeFormUrl = '/change/',
     $mainForm = $("#main_form"),
     $loginForm = $('#login_form'),
     $login = $('#login'),
@@ -338,7 +339,7 @@ var processFormUrl = '/process/',
                     });
                     $('#change-button').on('click', function(e) {
                         e.preventDefault();
-                        $changeForm.on('submit', app.submitMainForm);
+                        $changeForm.on('submit', app.submitChangeForm);
                     });
                 });
             },
@@ -425,6 +426,30 @@ var processFormUrl = '/process/',
                 var loginFormData = $loginForm.serialize();
 
                 var ajaxResponse = app.loadAjax(loginFormUrl, loginFormData);
+                ajaxResponse.done(function( data ) {
+                    if (data.indexOf("alert-success") + 1) {
+                            $ajaxContainer.html(data);
+                        } else {
+                            $messageBox.append(data);
+                        }
+                    })
+                    .fail(function() {
+			            $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
+                    })
+                    .always(function() {
+                        submitBtn.removeAttr('disabled');
+                    });
+            },
+
+            submitChangeForm: function(e) {
+                e.preventDefault();
+                $messageBox.empty();
+
+                var submitBtn = $changeForm.find('button[type="submit"]');
+                submitBtn.attr('disabled', 'disabled');
+                var changeFormData = $changeForm.serialize();
+
+                var ajaxResponse = app.loadAjax(changeFormUrl, changeFormData);
                 ajaxResponse.done(function( data ) {
                     if (data.indexOf("alert-success") + 1) {
                             $ajaxContainer.html(data);
