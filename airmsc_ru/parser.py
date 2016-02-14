@@ -205,7 +205,7 @@ def get_recipients(overpdk_list_all_stations):
         filter_parameter = {query_parameter: True}
         recipients = Member.objects.filter(**filter_parameter)
         for recipient in recipients:
-            address = recipient.username
+            address = recipient.email
             recipients_and_stations.setdefault(address, set())
             recipients_and_stations[address].add((station_name_id, station_name))     
     return recipients_and_stations
