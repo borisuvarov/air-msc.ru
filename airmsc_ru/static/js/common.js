@@ -443,7 +443,7 @@ var processFormUrl = '/process/',
                 var $changeForm = $("#change-form"),
                     submitBtn = $changeForm.find('button[type="submit"]');
                 submitBtn.attr('disabled', 'disabled');
-                var changeFormData = $changeForm.serialize();
+                var changeFormData = $changeForm.serialize() + "&stations=" + subscribitionsList.toString();
 
                 var ajaxResponse = app.loadAjax(changeFormUrl, changeFormData);
                 ajaxResponse.done(function( data ) {
