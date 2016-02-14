@@ -388,8 +388,8 @@ var processFormUrl = '/process/',
                     })
                     .fail(function() {
                         $messageBox.append('<div id="error_message" class="alert alert-danger">ПРОИЗОШЛА ОШИБКА, ПОПРОБУЙТЕ ЕЩЁ РАЗ</div>').hide().fadeIn('fast');
-                    })
-                $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»')
+                    });
+                $('small').text('Введите email и пароль, которые вы использовали при подписке, и нажмите кнопку «Войти»');
                 $('#login_form').on('submit', app.submitLoginForm);
             },
 
