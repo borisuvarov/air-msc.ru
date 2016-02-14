@@ -12,7 +12,6 @@ from django.template import Context
 from django.core import mail
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
 
 
 Q = Queue(connection=Redis())
@@ -230,5 +229,5 @@ def process(request):
             return render(request, template)
 
     template = "form_errors.html"
-    context = RequestContext(request, {"form": form})
+    context = {"form": form}
     return render(request, template, context)
