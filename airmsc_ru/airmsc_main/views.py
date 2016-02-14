@@ -125,7 +125,7 @@ def unsubscribe(request):
 
     form = MemberModelForm(request.POST or None)
     template = "unsubscribe_success.html"
-    context = RequestContext(request, {"form": form})
+    context = {"form": form}
     return render(request, template, context)
 
 

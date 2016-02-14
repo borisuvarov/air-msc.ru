@@ -1,8 +1,6 @@
 import datetime
 import psycopg2
 
-from django.template import RequestContext
-
 
 class UptimeCounter():
     def __init__(self):
@@ -35,4 +33,4 @@ counter = UptimeCounter()
 
 
 def add_uptime_to_context(request):
-    return RequestContext(request, {'days': counter.uptime})
+    return request.update({'days': counter.uptime})
