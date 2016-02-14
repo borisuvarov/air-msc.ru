@@ -58,7 +58,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'airmsc_main.context_processors.uptime_counter',
+                'airmsc_main.context_processors.add_uptime_to_context',
             ],
         },
     },
