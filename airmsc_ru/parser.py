@@ -179,6 +179,18 @@ def send_email(overpdk_list_all_stations):
             if not station_names:
                 member.poisoned_stations = ''
                 member.save()
+                emailvars = {'unsubscribe': 'http://air-msc.ru/unsubscribe/'
+                                + '?' + 'pochta=' + recipient + '&'
+                                + 'hash=' + acthash}
+                email_content_context = Context(emailvars)
+                msg_plain = render_to_string('email_poison_free.html', email_content_context)
+                msg_html = render_to_string('email_poison_free.html', email_content_context)
+
+                Q.enqueue_call(func=mail.send_mail,
+                               args=(subject, msg_plain, sender, [recipient]),
+                               kwargs=({'html_message': msg_html, 'fail_silently': False})
+                               )
+
             if station_names and station_names != member.poisoned_stations:
                 emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
                              'http://air-msc.ru/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
@@ -186,7 +198,6 @@ def send_email(overpdk_list_all_stations):
                 email_content_context = Context(emailvars)
                 msg_plain = render_to_string('email_poison.html', email_content_context)
                 msg_html = render_to_string('email_poison.html', email_content_context)
-
                 try:
                     Q.enqueue_call(func=mail.send_mail,
                                    args=(subject, msg_plain, sender, [recipient]),
