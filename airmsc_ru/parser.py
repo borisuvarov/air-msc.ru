@@ -177,8 +177,9 @@ def send_email(overpdk_list_all_stations):
                             else:
                                 pass
             if not station_names:
-                member.memberdata_set.get().update(poisoned_stations='')
-                member.save()
+                memberdata = member.memberdata_set.get()
+                memberdata.poisoned_stations = ''
+                memberdata.save(update_fields=["poisoned_stations"])
                 emailvars = {'unsubscribe': 'http://air-msc.ru/unsubscribe/'
                                 + '?' + 'pochta=' + recipient + '&'
                                 + 'hash=' + acthash}
@@ -203,9 +204,10 @@ def send_email(overpdk_list_all_stations):
                                    args=(subject, msg_plain, sender, [recipient]),
                                    kwargs=({'html_message': msg_html, 'fail_silently': False})
                                    )
-                    member.memberdata_set.get().update(poisoned_stations=station_names)
-                    member.save()
-                    sys.stdout.write(str(member.memberdata_set.get().poisoned_stations))
+                    memberdata = member.memberdata_set.get()
+                    memberdata.poisoned_stations = station_names
+                    memberdata.save(update_fields=["poisoned_stations"])
+                    sys.stdout.write(str(memberdata.poisoned_stations))
                     sys.stdout.write(str(station_names))
                 except Exception as e:
                     sys.stdout.write(str(e))
