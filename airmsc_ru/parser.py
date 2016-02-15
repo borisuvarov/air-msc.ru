@@ -204,9 +204,9 @@ def send_email(overpdk_list_all_stations):
                                    kwargs=({'html_message': msg_html, 'fail_silently': False})
                                    )
                     member.memberdata_set.get().poisoned_stations = station_names
-                    sys.stdout.write(str(member.memberdata_set.get().poisoned_stations))
-                    sys.stdout.write(str(station_names)) 
                     member.save()
+                    sys.stdout.write(str(member.memberdata_set.get().poisoned_stations))
+                    sys.stdout.write(str(station_names))
                 except Exception as e:
                     sys.stdout.write(str(e))
 
