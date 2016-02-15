@@ -177,7 +177,7 @@ def send_email(overpdk_list_all_stations):
                             else:
                                 pass
             if not station_names:
-                member.poisoned_stations = ''
+                member.memberdata_set.get().poisoned_stations = ''
                 member.save()
                 emailvars = {'unsubscribe': 'http://air-msc.ru/unsubscribe/'
                                 + '?' + 'pochta=' + recipient + '&'
@@ -191,7 +191,7 @@ def send_email(overpdk_list_all_stations):
                                kwargs=({'html_message': msg_html, 'fail_silently': False})
                                )
 
-            if station_names and station_names != member.poisoned_stations:
+            if station_names and station_names != member.memberdata_set.get().poisoned_stations:
                 emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
                              'http://air-msc.ru/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
                              + 'hash=' + acthash}
@@ -203,7 +203,7 @@ def send_email(overpdk_list_all_stations):
                                    args=(subject, msg_plain, sender, [recipient]),
                                    kwargs=({'html_message': msg_html, 'fail_silently': False})
                                    )
-                    member.poisoned_stations = station_names
+                    member.memberdata_set.get().poisoned_stations = station_names
                     member.save()
                 except Exception as e:
                     sys.stdout.write(str(e))
