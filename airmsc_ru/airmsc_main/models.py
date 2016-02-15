@@ -61,7 +61,6 @@ class Member(AbstractBaseUser):
 class MemberData(models.Model):
     member = models.ForeignKey(Member)
     activation_hash = models.CharField(max_length=100)
-    poisoned_stations = models.TextField(blank=True, null=True)
     donskoyshabolovka = models.BooleanField()
     donskoychura = models.BooleanField()
     danilovskiy = models.BooleanField()
