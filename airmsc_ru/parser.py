@@ -136,9 +136,10 @@ def get_actual_concentrations(parsed_body):
         else:
             columns_numbers.append(number)
             number += 1
-    day = datetime.datetime.strptime(
-        parsed_body.xpath(('/html/body/table/tr[50]/td[1]/b/text()'))[0].split()[0],
-        '%d.%m.%Y')
+    # day = datetime.datetime.strptime(
+    #     parsed_body.xpath(('/html/body/table/tr[50]/td[1]/b/text()'))[0].split()[0],
+    #     '%d.%m.%Y')
+    day = parsed_body.xpath(('/html/body/table/tr[50]/td[1]/b/text()'))[0]
     sys.stdout.write(str(day))
     concentrations = []
     for number in columns_numbers:
