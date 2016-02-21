@@ -119,7 +119,7 @@ def get_actual_concentrations(parsed_body):
                 parsed_body.xpath(
                     '/html/body/table/tr[50]/td[1]/b/text()'
                 )[0].split()[0], '%d.%m.%Y')
-            print(day)
+            print(day == datetime.date.today())
         except Exception as e:
             sys.stdout.write(str(e))
             day = None
