@@ -6,6 +6,7 @@ import psycopg2
 import datetime
 import os
 import sys
+from random import choice
 
 from redis import Redis
 from rq import Queue
@@ -103,6 +104,11 @@ POISONS_NOPDK_TO_IGNORE = [
     'CHX (Углеводороды суммарные)'
 ]
 
+YANDEX_MAILBOXES = [
+    'moscowaircom@yandex.ru',
+    'air-msc@yandex.ru'
+]
+
 
 def get_actual_concentrations(parsed_body):
     table_headers = parsed_body.xpath(
@@ -131,6 +137,8 @@ def get_actual_concentrations(parsed_body):
             columns_numbers.append(number)
             number += 1
 
+    day = parsed_body.xpath(('/html/body/table/tr[last()]/td[1]/text()'))
+    sys.stdout.write(day)
     concentrations = []
     for number in columns_numbers:
         conc = parsed_body.xpath(
@@ -151,7 +159,7 @@ def get_actual_concentrations(parsed_body):
 
 def send_email(overpdk_list_all_stations):
     subject = 'Предупреждение о загрязнении воздуха!'
-    sender = 'moscowaircom@yandex.ru'
+    sender = choice(YANDEX_MAILBOXES)
 
     recipients_and_stations = get_recipients(overpdk_list_all_stations)
     for recipient in recipients_and_stations:
@@ -206,6 +214,7 @@ def send_email(overpdk_list_all_stations):
                                    )
                     memberdata = member.memberdata_set.get()
                     memberdata.poisoned_stations = station_names
+                    memberdata.save(update_fields=["poisoned_stations"])
                     memberdata.save(update_fields=["poisoned_stations"])
                     sys.stdout.write(str(memberdata.poisoned_stations))
                     sys.stdout.write(str(station_names))
