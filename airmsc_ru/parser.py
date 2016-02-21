@@ -105,9 +105,11 @@ POISONS_NOPDK_TO_IGNORE = [
 ]
 
 YANDEX_MAILBOXES = [
-    'moscowaircom@yandex.ru',
-    'air-msc@yandex.ru'
+    'alert@air-msc.ru',
+    'alert@air-msc.ru'
 ]
+
+sent_today = 0
 
 
 def get_actual_concentrations(parsed_body):
@@ -119,9 +121,7 @@ def get_actual_concentrations(parsed_body):
                 parsed_body.xpath(
                     '/html/body/table/tr[50]/td[1]/b/text()'
                 )[0].split()[0], '%d.%m.%Y')
-            print(day.date() == datetime.date.today())
         except Exception as e:
-            sys.stdout.write(str(e))
             day = None
     else:
         day = None
@@ -208,11 +208,15 @@ def send_email(overpdk_list_all_stations):
                 email_content_context = Context(emailvars)
                 msg_plain = render_to_string('email_poison_free.html', email_content_context)
                 msg_html = render_to_string('email_poison_free.html', email_content_context)
-
-                Q.enqueue_call(func=mail.send_mail,
-                               args=(subject, msg_plain, sender, [recipient]),
-                               kwargs=({'html_message': msg_html, 'fail_silently': False})
-                               )
+                try:
+                    Q.enqueue_call(func=mail.send_mail,
+                                   args=(subject, msg_plain, sender, [recipient]),
+                                   kwargs=({'html_message': msg_html, 'fail_silently': False})
+                                   )
+                    global sent_today
+                    sent_today += 1
+                except Exception as e:
+                    sys.stdout.write(str(e))
 
             if station_names and station_names != member.memberdata_set.get().poisoned_stations:
                 emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
@@ -230,6 +234,8 @@ def send_email(overpdk_list_all_stations):
                     memberdata.poisoned_stations = station_names
                     memberdata.save(update_fields=["poisoned_stations"])
                     memberdata.save(update_fields=["poisoned_stations"])
+                    global sent_today
+                    sent_today += 1
                 except Exception as e:
                     sys.stdout.write(str(e))
 
@@ -316,7 +322,7 @@ def main():
     else:
         try:
             Q.enqueue_call(func=mail.send_mail,
-                           args=('Админу', 'все нормуль', 'moscowaircom@yandex.ru', ['boris.uwarow@gmail.com']),
+                           args=('Админу', 'все нормуль', 'alert@air-msc.ru', ['boris.uwarow@gmail.com']),
                            kwargs=({'html_message': '<p>Все чисто, братан!</p>', 'fail_silently': False})
                            )
         except Exception as e:
