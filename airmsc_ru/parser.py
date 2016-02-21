@@ -136,8 +136,10 @@ def get_actual_concentrations(parsed_body):
         else:
             columns_numbers.append(number)
             number += 1
-    day = parsed_body.xpath(('/html/body/table/tr[50]/td[1]/b/text()'))
-    sys.stdout.write(''.join(day))
+    day = datetime.datetime.strptime(
+        parsed_body.xpath(('/html/body/table/tr[50]/td[1]/b/text()')).split(),
+        '%d.%m.%Y')
+    sys.stdout.write(str(day))
     concentrations = []
     for number in columns_numbers:
         conc = parsed_body.xpath(
@@ -215,8 +217,6 @@ def send_email(overpdk_list_all_stations):
                     memberdata.poisoned_stations = station_names
                     memberdata.save(update_fields=["poisoned_stations"])
                     memberdata.save(update_fields=["poisoned_stations"])
-                    sys.stdout.write(str(memberdata.poisoned_stations))
-                    sys.stdout.write(str(station_names))
                 except Exception as e:
                     sys.stdout.write(str(e))
 
