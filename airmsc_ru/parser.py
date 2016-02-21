@@ -109,6 +109,7 @@ YANDEX_MAILBOXES = [
     'alert@air-msc.ru'
 ]
 
+global sent_today
 sent_today = 0
 
 
@@ -323,7 +324,7 @@ def main():
         try:
             Q.enqueue_call(func=mail.send_mail,
                            args=('Админу', 'все нормуль', 'alert@air-msc.ru', ['boris.uwarow@gmail.com']),
-                           kwargs=({'html_message': '<p>Все чисто, братан!</p>', 'fail_silently': False})
+                           kwargs=({'html_message': '<p>Все чисто, братан!' + str(sent_today) + '</p>', 'fail_silently': False})
                            )
         except Exception as e:
             sys.stdout.write(str(e))
