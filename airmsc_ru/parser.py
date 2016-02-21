@@ -6,9 +6,8 @@ import psycopg2
 import datetime
 import os
 import sys
-from random import choice
 
-from redis import Redis
+from redis import Redis, StrictRedis
 from rq import Queue
 
 import django
@@ -27,6 +26,16 @@ django.setup()
 from airmsc_main.models import Member, MemberData
 
 Q = Queue(connection=Redis())
+
+r = StrictRedis()
+r.setnx('sent_today', 0)
+if r.exists('today'):
+    old_date = r.getset('today', str(datetime.date.today()))
+else:
+    r.set('today', str(datetime.date.today()))
+    old_date = ''
+if old_date != datetime.date.today():
+    r.set('sent_today', 0)
 
 STATIONS_LINKS = [
     ('Мещанский', 'http://mosecom.ru/air/air-today/station/suhar/table.html',
@@ -104,13 +113,6 @@ POISONS_NOPDK_TO_IGNORE = [
     'CHX (Углеводороды суммарные)'
 ]
 
-YANDEX_MAILBOXES = [
-    'alert@air-msc.ru',
-    'alert@air-msc.ru'
-]
-
-sent_today = 0
-
 
 def get_actual_concentrations(parsed_body):
     date_and_time = parsed_body.xpath(
@@ -173,7 +175,7 @@ def get_actual_concentrations(parsed_body):
 
 def send_email(overpdk_list_all_stations):
     subject = 'Предупреждение о загрязнении воздуха!'
-    sender = choice(YANDEX_MAILBOXES)
+    sender = 'alert@air-msc.ru'
 
     recipients_and_stations = get_recipients(overpdk_list_all_stations)
     for recipient in recipients_and_stations:
@@ -213,8 +215,7 @@ def send_email(overpdk_list_all_stations):
                                    args=(subject, msg_plain, sender, [recipient]),
                                    kwargs=({'html_message': msg_html, 'fail_silently': False})
                                    )
-                    global sent_today
-                    sent_today += 1
+                    r.incr('sent_today')
                 except Exception as e:
                     sys.stdout.write(str(e))
 
@@ -234,8 +235,7 @@ def send_email(overpdk_list_all_stations):
                     memberdata.poisoned_stations = station_names
                     memberdata.save(update_fields=["poisoned_stations"])
                     memberdata.save(update_fields=["poisoned_stations"])
-                    global sent_today
-                    sent_today += 1
+                    r.incr('sent_today')
                 except Exception as e:
                     sys.stdout.write(str(e))
 
@@ -323,7 +323,7 @@ def main():
         try:
             Q.enqueue_call(func=mail.send_mail,
                            args=('Админу', 'все нормуль', 'alert@air-msc.ru', ['boris.uwarow@gmail.com']),
-                           kwargs=({'html_message': '<p>Все чисто, братан!' + str(sent_today) + '</p>', 'fail_silently': False})
+                           kwargs=({'html_message': '<p>Все чисто, братан!' + str(r.get('sent_today')) + '</p>', 'fail_silently': False})
                            )
         except Exception as e:
             sys.stdout.write(str(e))
