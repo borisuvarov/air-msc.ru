@@ -115,7 +115,7 @@ def get_actual_concentrations(parsed_body):
         '/html/body/table/tr[50]/td[1]/b/text()')
     if date_and_time:
         try:
-            day = datetime.datetime.strptime(
+            day = datetime.date.strptime(
                 parsed_body.xpath(
                     '/html/body/table/tr[50]/td[1]/b/text()'
                 )[0].split()[0], '%d.%m.%Y')
