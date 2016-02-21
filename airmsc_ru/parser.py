@@ -38,33 +38,28 @@ if old_date != datetime.date.today():
     r.set('sent_today', 0)
 
 STATIONS_LINKS = [
-    ('Мещанский', 'http://mosecom.ru/air/air-today/station/suhar/table.html',
-    'meschansky'),
-    ('Басманный (Казакова)',
-     'http://mosecom.ru/air/air-today/station/kazak/table.html', 'basmanniykazakova'),
-     ('Пресненский', 'http://mosecom.ru/air/air-today/station/spirid/table.html',
-      'presnenskiy'),
-     ('Басманный (Спартаковская)',
-      'http://mosecom.ru/air/air-today/station/spartakovskaya/table.html', 'basmanniyspartak'),
-     ('Хамовники', 'http://mosecom.ru/air/air-today/station/hamovniki/table.html',
-      'khamovniki'),
-     ('Тверской', 'http://www.mosecom.ru/air/air-today/station/chayanova/table.html', 'tverskoy'),
-     ('Донской (Шаболовка)', 'http://mosecom.ru/air/air-today/station/shabol/table.html', 'donskoyshabolovka'),
-     ('Донской (Чура)','http://mosecom.ru/air/air-today/station/chura/table.html', 'donskoychura'),
-     ('Даниловский','http://mosecom.ru/air/air-today/station/kozuhovskaya/table.html', 'danilovskiy'),
-     ('Западное Бирюлево','http://mosecom.ru/air/air-today/station/biryulevo/table.html', 'zapbirulovo'),
-     ('Орехово-Борисово Южное','http://mosecom.ru/air/air-today/station/gurevsk/table.html', 'orekhovo'),
-     ('Царицыно','http://mosecom.ru/air/air-today/station/proletarskiy/table.html', 'tsarytsyno'),
-     ('Коньково','http://mosecom.ru/air/air-today/station/butlerova/table.html', 'konkovo'),
-     ('Академический','http://mosecom.ru/air/air-today/station/cheremushki/table.html', 'akademicheskiy'),
-     ('Гагаринский','http://mosecom.ru/air/air-today/station/gagrina/table.html', 'gagarinskiy'),
-     ('Южное Бутово','http://mosecom.ru/air/air-today/station/melitopolskaya/table.html', 'southbutovo'),
-     ('Марьинский парк','http://mosecom.ru/air/air-today/station/marin/table.html', 'marinskiypark'),
-     ('Люблино (Совхозная)','http://mosecom.ru/air/air-today/station/lyublino/table.html', 'lublinosovkhoz'),
-     ('Капотня','http://mosecom.ru/air/air-today/station/kapotnya/table.html', 'kapotnya'),
-     ('Люблино (Головачёва)','http://mosecom.ru/air/air-today/station/golovacheva/table.html', 'lyblinogolovach'),
-     ('Рязанский','http://mosecom.ru/air/air-today/station/veshnyaki/table.html', 'ryazanskiy'),
-     ('Печатники','http://mosecom.ru/air/air-today/station/guryanova/table.html', 'pechatniki'),
+    ('Мещанский', 'http://mosecom.ru/air/air-today/station/suhar/table.html', 'meschansky'),
+    ('Басманный (Казакова)', 'http://mosecom.ru/air/air-today/station/kazak/table.html', 'basmanniykazakova'),
+    ('Пресненский', 'http://mosecom.ru/air/air-today/station/spirid/table.html', 'presnenskiy'),
+    ('Басманный (Спартаковская)', 'http://mosecom.ru/air/air-today/station/spartakovskaya/table.html', 'basmanniyspartak'),
+    ('Хамовники', 'http://mosecom.ru/air/air-today/station/hamovniki/table.html', 'khamovniki'),
+    ('Тверской', 'http://www.mosecom.ru/air/air-today/station/chayanova/table.html', 'tverskoy'),
+    ('Донской (Шаболовка)', 'http://mosecom.ru/air/air-today/station/shabol/table.html', 'donskoyshabolovka'),
+    ('Донской (Чура)','http://mosecom.ru/air/air-today/station/chura/table.html', 'donskoychura'),
+    ('Даниловский','http://mosecom.ru/air/air-today/station/kozuhovskaya/table.html', 'danilovskiy'),
+    ('Западное Бирюлево','http://mosecom.ru/air/air-today/station/biryulevo/table.html', 'zapbirulovo'),
+    ('Орехово-Борисово Южное','http://mosecom.ru/air/air-today/station/gurevsk/table.html', 'orekhovo'),
+    ('Царицыно','http://mosecom.ru/air/air-today/station/proletarskiy/table.html', 'tsarytsyno'),
+    ('Коньково','http://mosecom.ru/air/air-today/station/butlerova/table.html', 'konkovo'),
+    ('Академический','http://mosecom.ru/air/air-today/station/cheremushki/table.html', 'akademicheskiy'),
+    ('Гагаринский','http://mosecom.ru/air/air-today/station/gagrina/table.html', 'gagarinskiy'),
+    ('Южное Бутово','http://mosecom.ru/air/air-today/station/melitopolskaya/table.html', 'southbutovo'),
+    ('Марьинский парк','http://mosecom.ru/air/air-today/station/marin/table.html', 'marinskiypark'),
+    ('Люблино (Совхозная)','http://mosecom.ru/air/air-today/station/lyublino/table.html', 'lublinosovkhoz'),
+    ('Капотня','http://mosecom.ru/air/air-today/station/kapotnya/table.html', 'kapotnya'),
+    ('Люблино (Головачёва)','http://mosecom.ru/air/air-today/station/golovacheva/table.html', 'lyblinogolovach'),
+    ('Рязанский','http://mosecom.ru/air/air-today/station/veshnyaki/table.html', 'ryazanskiy'),
+    ('Печатники','http://mosecom.ru/air/air-today/station/guryanova/table.html', 'pechatniki'),
     ('Лосиный остров','http://mosecom.ru/air/air-today/station/losinyj/table.html', 'losiniyostrov'),
     ('Косино','http://mosecom.ru/air/air-today/station/kosino/table.html', 'kosino'),
     ('Кожухово','http://mosecom.ru/air/air-today/station/kojuhovo/table.html', 'kozhuhovo'),
@@ -76,16 +71,15 @@ STATIONS_LINKS = [
     ('Дмитровский','http://mosecom.ru/air/air-today/station/dolgoprud/table.html', 'dmitrovskiy'),
     ('Сокол','http://mosecom.ru/air/air-today/station/svetly/table.html', 'sokol'),
     ('Покровское-Стрешнево','http://mosecom.ru/air/air-today/station/letnaya/table.html', 'pokrovskoestreshnevo'),
-     ('Северное Тушино','http://mosecom.ru/air/air-today/station/turist/table.html', 'northtushino'),
-     ('Хорошево-Мневники','http://mosecom.ru/air/air-today/station/narod_op/table.html', 'khoroshevomnevniki'),
-     ('Раменки','http://mosecom.ru/air/air-today/station/mgu/table.html', 'ramenki'),
-     ('Тропарево-Никулино','http://mosecom.ru/air/air-today/station/vernad/table.html', 'troparevonikulino'),
-     ('Можайский','http://mosecom.ru/air/air-today/station/mojayskoe_sh/table.html', 'mozhaisky'),
-     ('Дорогомилово','http://mosecom.ru/air/air-today/station/kutuz_2/table.html', 'dorogomilovo'),
-     ('Щербинка','http://mosecom.ru/air/air-today/station/scherbinka/table.html', 'scherbinka'),
-     ('Саларьево (Московский)','http://mosecom.ru/air/air-today/station/salarevo/table.html','salarievo'),
+    ('Северное Тушино','http://mosecom.ru/air/air-today/station/turist/table.html', 'northtushino'),
+    ('Хорошево-Мневники','http://mosecom.ru/air/air-today/station/narod_op/table.html', 'khoroshevomnevniki'),
+    ('Раменки','http://mosecom.ru/air/air-today/station/mgu/table.html', 'ramenki'),
+    ('Тропарево-Никулино','http://mosecom.ru/air/air-today/station/vernad/table.html', 'troparevonikulino'),
+    ('Можайский','http://mosecom.ru/air/air-today/station/mojayskoe_sh/table.html', 'mozhaisky'),
+    ('Дорогомилово','http://mosecom.ru/air/air-today/station/kutuz_2/table.html', 'dorogomilovo'),
+    ('Щербинка','http://mosecom.ru/air/air-today/station/scherbinka/table.html', 'scherbinka'),
+    ('Саларьево (Московский)','http://mosecom.ru/air/air-today/station/salarevo/table.html','salarievo'),
 ]
-
 
 PDK = [
     ('CO (Оксид углерода)', 5),
@@ -317,11 +311,11 @@ def main():
 
     if sentinel:
         send_email(overpdk_list_all_stations)
-    else:
+    if int(r.get('sent_today')) > 2000:
         try:
             Q.enqueue_call(func=mail.send_mail,
-                           args=('Админу', 'все нормуль', 'alert@air-msc.ru', ['boris.uwarow@gmail.com']),
-                           kwargs=({'html_message': '<p>Все чисто, братан!' + str(int(r.get('sent_today'))) + '</p>', 'fail_silently': False})
+                           args=('Админу', 'Лимит рассылок приближается', 'alert@air-msc.ru', ['boris.uwarow@gmail.com']),
+                           kwargs=({'html_message': '<p>Разослано писем сегодня: ' + str(int(r.get('sent_today'))) + '</p>', 'fail_silently': False})
                            )
         except Exception as e:
             sys.stdout.write(str(e))
