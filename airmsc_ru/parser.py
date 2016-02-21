@@ -310,8 +310,6 @@ def main():
             except:
                 print("Возникло исключение при записи в БД")
 
-
-       
         overpdk_list_all_stations.append(overpdk_list_for_station)
 
     cur.close()
@@ -323,7 +321,7 @@ def main():
         try:
             Q.enqueue_call(func=mail.send_mail,
                            args=('Админу', 'все нормуль', 'alert@air-msc.ru', ['boris.uwarow@gmail.com']),
-                           kwargs=({'html_message': '<p>Все чисто, братан!' + str(r.get('sent_today')) + '</p>', 'fail_silently': False})
+                           kwargs=({'html_message': '<p>Все чисто, братан!' + str(int(r.get('sent_today'))) + '</p>', 'fail_silently': False})
                            )
         except Exception as e:
             sys.stdout.write(str(e))
