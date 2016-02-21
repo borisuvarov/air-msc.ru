@@ -109,7 +109,6 @@ YANDEX_MAILBOXES = [
     'alert@air-msc.ru'
 ]
 
-global sent_today
 sent_today = 0
 
 
