@@ -111,52 +111,62 @@ YANDEX_MAILBOXES = [
 
 
 def get_actual_concentrations(parsed_body):
-    table_headers = parsed_body.xpath(
-        '/html/body/table/tr[1]/th[@class="header"]/text()')[1:]
-    units_headers = parsed_body.xpath(
-        '/html/body/table/tr[2]/td[@class="header"]/text()')
+    date_and_time = parsed_body.xpath(
+        '/html/body/table/tr[50]/td[1]/b/text()')
+    if date_and_time:
+        try:
+            day = datetime.datetime.strptime(
+                parsed_body.xpath(
+                    '/html/body/table/tr[50]/td[1]/b/text()'
+                )[0].split()[0], '%d.%m.%Y')
+        except:
+            day = None
+    else:
+        day = None
+    if day and day == datetime.date.today():
+        table_headers = parsed_body.xpath(
+            '/html/body/table/tr[1]/th[@class="header"]/text()')[1:]
+        units_headers = parsed_body.xpath(
+            '/html/body/table/tr[2]/td[@class="header"]/text()')
 
-    parse_index = []
-    counter = 0
-    for poison in table_headers:
-        if poison in POISONS_NOPDK_TO_IGNORE:
-            parse_index.append([poison, units_headers[counter]])
-            counter += 1
-        else:
-            parse_index.append(
-                [poison, units_headers[counter], units_headers[counter + 1]])
-            counter += 1
+        parse_index = []
+        counter = 0
+        for poison in table_headers:
+            if poison in POISONS_NOPDK_TO_IGNORE:
+                parse_index.append([poison, units_headers[counter]])
+                counter += 1
+            else:
+                parse_index.append(
+                    [poison, units_headers[counter], units_headers[counter + 1]])
+                counter += 1
 
-    columns_numbers = []
-    number = 2
-    for entry in parse_index:
-        if len(entry) > 2:
-            columns_numbers.append(number)
-            number += 2
-        else:
-            columns_numbers.append(number)
-            number += 1
-    # day = datetime.datetime.strptime(
-    #     parsed_body.xpath(('/html/body/table/tr[50]/td[1]/b/text()'))[0].split()[0],
-    #     '%d.%m.%Y')
-    day = parsed_body.xpath(('/html/body/table/tr[50]/td[1]/b/text()'))
-    sys.stdout.write(str(day))
-    concentrations = []
-    for number in columns_numbers:
-        conc = parsed_body.xpath(
-            ('/html/body/table/tr[last()]/td[{0}]/text()'.format(number)))
-        conc = "".join(conc)
-        concentrations.append(conc)
+        columns_numbers = []
+        number = 2
+        for entry in parse_index:
+            if len(entry) > 2:
+                columns_numbers.append(number)
+                number += 2
+            else:
+                columns_numbers.append(number)
+                number += 1
+        concentrations = []
+        for number in columns_numbers:
+            conc = parsed_body.xpath(
+                ('/html/body/table/tr[last()]/td[{0}]/text()'.format(number)))
+            conc = "".join(conc)
+            concentrations.append(conc)
 
-    all_concentrations = list(zip(table_headers, concentrations))
-    actual_concentrations = []
-    for poison_conc in all_concentrations:
-        if poison_conc[0] in POISONS_NOPDK_TO_IGNORE:
-            pass
-        else:
-            actual_concentrations.append(poison_conc)
+        all_concentrations = list(zip(table_headers, concentrations))
+        actual_concentrations = []
+        for poison_conc in all_concentrations:
+            if poison_conc[0] in POISONS_NOPDK_TO_IGNORE:
+                pass
+            else:
+                actual_concentrations.append(poison_conc)
 
-    return actual_concentrations
+        return actual_concentrations
+    else:
+        return None
 
 
 def send_email(overpdk_list_all_stations):
@@ -265,24 +275,34 @@ def main():
         datetime_of_check = datetime.datetime.now()
         station_name = station[2]
         overpdk_list_for_station = [(station[0], station_name)]
-
-        for entry in actual_conc:
-            substance = entry[0]
-            if entry[1] != '—':
-                concen = float(entry[1])
-            else:
-                concen = 0
+        if actual_conc:
+            for entry in actual_conc:
+                substance = entry[0]
+                if entry[1] != '—':
+                    concen = float(entry[1])
+                else:
+                    concen = 0
+                try:
+                    cur.execute(
+                        "INSERT INTO mosecomon (station, checktime, substance, concentration) VALUES (%s, %s, %s, %s)",
+                        (station_name, datetime_of_check, substance, concen))
+                    conn.commit()
+                    for pdk_tuple in PDK:
+                        if substance == pdk_tuple[0] and concen >= pdk_tuple[1]:
+                            sentinel = True
+                            overpdk_list_for_station.append((substance, concen))
+                except:
+                    print("Возникло исключение при записи в БД")
+        else:
             try:
                 cur.execute(
                     "INSERT INTO mosecomon (station, checktime, substance, concentration) VALUES (%s, %s, %s, %s)",
-                    (station_name, datetime_of_check, substance, concen))
+                    (station_name, datetime_of_check, 'SO2', '0'))
                 conn.commit()
-                for pdk_tuple in PDK:
-                    if substance == pdk_tuple[0] and concen >= pdk_tuple[1]:
-                        sentinel = True
-                        overpdk_list_for_station.append((substance, concen))
             except:
                 print("Возникло исключение при записи в БД")
+
+
        
         overpdk_list_all_stations.append(overpdk_list_for_station)
 
