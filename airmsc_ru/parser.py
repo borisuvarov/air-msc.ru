@@ -121,52 +121,53 @@ def get_actual_concentrations(parsed_body):
             day = None
     else:
         day = None
-    if day and day.date() == datetime.date.today() or \
-                    day.date() == datetime.date.today() - datetime.timedelta(days=1):
-        try:
-            table_headers = parsed_body.xpath(
-                '/html/body/table/tr[1]/th[@class="header"]/text()')[1:]
-            units_headers = parsed_body.xpath(
-                '/html/body/table/tr[2]/td[@class="header"]/text()')
+    if day:
+        if day.date() == datetime.date.today() or \
+                        day.date() == datetime.date.today() - datetime.timedelta(days=1):
+            try:
+                table_headers = parsed_body.xpath(
+                    '/html/body/table/tr[1]/th[@class="header"]/text()')[1:]
+                units_headers = parsed_body.xpath(
+                    '/html/body/table/tr[2]/td[@class="header"]/text()')
 
-            parse_index = []
-            counter = 0
-            for poison in table_headers:
-                if poison in POISONS_NOPDK_TO_IGNORE:
-                    parse_index.append([poison, units_headers[counter]])
-                    counter += 1
-                else:
-                    parse_index.append(
-                        [poison, units_headers[counter], units_headers[counter + 1]])
-                    counter += 1
+                parse_index = []
+                counter = 0
+                for poison in table_headers:
+                    if poison in POISONS_NOPDK_TO_IGNORE:
+                        parse_index.append([poison, units_headers[counter]])
+                        counter += 1
+                    else:
+                        parse_index.append(
+                            [poison, units_headers[counter], units_headers[counter + 1]])
+                        counter += 1
 
-            columns_numbers = []
-            number = 2
-            for entry in parse_index:
-                if len(entry) > 2:
-                    columns_numbers.append(number)
-                    number += 2
-                else:
-                    columns_numbers.append(number)
-                    number += 1
-            concentrations = []
-            for number in columns_numbers:
-                conc = parsed_body.xpath(
-                    ('/html/body/table/tr[last()]/td[{0}]/text()'.format(number)))
-                conc = "".join(conc)
-                concentrations.append(conc)
+                columns_numbers = []
+                number = 2
+                for entry in parse_index:
+                    if len(entry) > 2:
+                        columns_numbers.append(number)
+                        number += 2
+                    else:
+                        columns_numbers.append(number)
+                        number += 1
+                concentrations = []
+                for number in columns_numbers:
+                    conc = parsed_body.xpath(
+                        ('/html/body/table/tr[last()]/td[{0}]/text()'.format(number)))
+                    conc = "".join(conc)
+                    concentrations.append(conc)
 
-            all_concentrations = list(zip(table_headers, concentrations))
-            actual_concentrations = []
-            for poison_conc in all_concentrations:
-                if poison_conc[0] in POISONS_NOPDK_TO_IGNORE:
-                    pass
-                else:
-                    actual_concentrations.append(poison_conc)
+                all_concentrations = list(zip(table_headers, concentrations))
+                actual_concentrations = []
+                for poison_conc in all_concentrations:
+                    if poison_conc[0] in POISONS_NOPDK_TO_IGNORE:
+                        pass
+                    else:
+                        actual_concentrations.append(poison_conc)
 
-            return actual_concentrations
-        except:
-            return None
+                return actual_concentrations
+            except:
+                return None
     else:
         return None
 
