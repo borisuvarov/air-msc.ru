@@ -115,17 +115,17 @@ def get_actual_concentrations(parsed_body):
         '/html/body/table/tr[50]/td[1]/b/text()')
     if date_and_time:
         try:
-            day = datetime.date.strptime(
+            day = datetime.datetime.strptime(
                 parsed_body.xpath(
                     '/html/body/table/tr[50]/td[1]/b/text()'
                 )[0].split()[0], '%d.%m.%Y')
-            print(day == datetime.date.today())
+            print(day.date() == datetime.date.today())
         except Exception as e:
             sys.stdout.write(str(e))
             day = None
     else:
         day = None
-    if day and day == datetime.date.today():
+    if day and day.date() == datetime.date.today():
         table_headers = parsed_body.xpath(
             '/html/body/table/tr[1]/th[@class="header"]/text()')[1:]
         units_headers = parsed_body.xpath(
