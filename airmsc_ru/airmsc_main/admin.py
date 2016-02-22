@@ -3,7 +3,10 @@ from .models import Member
 
 
 class MemberAdmin(admin.ModelAdmin):
-    list_display = ['email']
+    list_display = ['email', 'stations_count']
+
+    def stations_count(self):
+        return self.memberdata_set.get().count()
 
     class Meta:
         model = Member
