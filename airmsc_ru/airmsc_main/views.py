@@ -86,7 +86,7 @@ def get_data_for_chart(request):
             else:
                 data_provider[date].append((entry[1], entry[2]))
 
-        return json.dumps(data)
+        return json.dumps(data_provider)
     else:
         return Http404
 

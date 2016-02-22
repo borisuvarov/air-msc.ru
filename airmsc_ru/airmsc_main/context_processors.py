@@ -1,5 +1,6 @@
 import datetime
 import psycopg2
+from django.conf import settings
 
 
 class UptimeCounter():
@@ -15,12 +16,10 @@ class UptimeCounter():
             return self.calculate_uptime()
 
     def calculate_uptime(self):
-        with open('/home/djangoair/airmsc/air/airmsc_ru/airmsc/databasepswd.txt') as f:
-            DATABASE_PASSWORD = f.read().strip()
         conn = psycopg2.connect(
             database="djangoair",
             user="djangoair",
-            password=DATABASE_PASSWORD,
+            password=settings.DATABASE_PASSWORD,
             host="127.0.0.1")
         cur = conn.cursor()
         cur.execute("SELECT COUNT (DISTINCT((DATE(checktime)))) FROM mosecomon;")
