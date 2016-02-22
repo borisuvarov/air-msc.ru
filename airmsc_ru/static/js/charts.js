@@ -4,7 +4,7 @@ $(function() {
     function getChartData(station) {
         $.ajax({
             url: '/charts-data/',
-            type: GET,
+            type: 'GET',
             data: 'kapotnya'
         })
         .done(function(content) {
