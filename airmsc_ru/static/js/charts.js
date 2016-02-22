@@ -3,10 +3,21 @@ $(function() {
     var samplePayload = {'station': 'kapotnya'};
 
 
-    $.get('/charts-data/', samplePayload, function(chartData) {drawChart(chartData)}, 'json');
+    $.get('/charts-data/', samplePayload, function(rawData) {drawChart(rawData)}, 'json');
 
-    function drawChart(chartData) {
-        console.log(chartData);
+    function drawChart(rawData) {
+        console.log(rawData);
+        var chartData = {
+            date: [],
+            "H2S (Сероводород)": [],
+            "NO (Оксид азота)": [],
+            "CO (Оксид углерода)": [],
+            "NO2 (Диоксид азота)": [],
+            "CH4 (Метан)": []
+        };
+        $.each(rawData, function(index, value) {
+            console.log(value);
+        });
         var chart = AmCharts.makeChart("chartdiv", {
             "theme": "light",
             "type": "serial",
