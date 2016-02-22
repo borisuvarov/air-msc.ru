@@ -16,8 +16,11 @@ $(function() {
             "CH4 (Метан)": []
         };
         $.each(rawData, function(index, value) {
-            console.log(Object.keys(rawData));
+            chartData.date.push(new Date(Object.keys(rawData)[index]));
             console.log(value);
+            //$.each(value, function(index, arr) {
+            //    if (value[0] == 'H2S (Сероводород)')
+            //})
         });
         var chart = AmCharts.makeChart("chartdiv", {
             "theme": "light",
