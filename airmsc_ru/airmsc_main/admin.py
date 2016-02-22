@@ -5,8 +5,8 @@ from .models import Member
 class MemberAdmin(admin.ModelAdmin):
     list_display = ['email', 'stations_count']
 
-    def stations_count(self):
-        return self.memberdata_set.get().count()
+    def stations_count(self, obj):
+        return obj.memberdata_set.get().count()
 
     class Meta:
         model = Member
