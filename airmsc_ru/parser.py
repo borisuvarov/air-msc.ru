@@ -233,7 +233,6 @@ def send_email(overpdk_list_all_stations):
                     memberdata = member.memberdata_set.get()
                     memberdata.poisoned_stations = station_names
                     memberdata.save(update_fields=["poisoned_stations"])
-                    memberdata.save(update_fields=["poisoned_stations"])
                     r.incr('sent_today')
                 except Exception as e:
                     sys.stdout.write(str(e))

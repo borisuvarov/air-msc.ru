@@ -211,7 +211,7 @@ def process(request):
 
 
             subject = 'Активация подписки на сайте air-msc.ru'
-            sender = 'moscowaircom@yandex.ru'
+            sender = 'alert@air-msc.ru'
             emailvars = {'hash': 'http://air-msc.ru/activation/'
                          + '?' + 'pochta=' + email + '&' + 'hash=' + acthash
                          }

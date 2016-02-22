@@ -89,13 +89,13 @@ EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
