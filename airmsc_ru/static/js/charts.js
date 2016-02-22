@@ -16,6 +16,7 @@ $(function() {
             "CH4 (Метан)": []
         };
         $.each(rawData, function(index, value) {
+            console.log(Object.keys(rawData));
             console.log(value);
         });
         var chart = AmCharts.makeChart("chartdiv", {
