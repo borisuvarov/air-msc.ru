@@ -6,7 +6,7 @@ from rq import Queue
 import psycopg2
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render, Http404
 from django.conf import settings
 from .forms import MemberModelForm
 from .models import Member, MemberData
@@ -66,18 +66,21 @@ clean_subscribitions_dict = {
 
 def get_data_for_chart(request):
     station = request.GET.get('station')
-    conn = psycopg2.connect(
-        database="djangoair",
-        user="djangoair",
-        password=settings.DATABASE_PASSWORD,
-        host="127.0.0.1")
-    cur = conn.cursor()
-    cur.execute("SELECT checktime, substance, concentration FROM mosecomon WHERE station=" + station + ";")
-    data = cur.fetchall()
-    sys.stdout.write(str(data))
-    cur.close()
-    conn.close()
-    return json.dumps(data)
+    if station in clean_subscribitions_dict:
+        conn = psycopg2.connect(
+            database="djangoair",
+            user="djangoair",
+            password=settings.DATABASE_PASSWORD,
+            host="127.0.0.1")
+        cur = conn.cursor()
+        cur.execute("SELECT checktime, substance, concentration FROM mosecomon WHERE station='" + station + "';")
+        data = cur.fetchall()
+        sys.stdout.write(str(data))
+        cur.close()
+        conn.close()
+        return json.dumps(data)
+    else:
+        return Http404
 
 
 def activation(request):
