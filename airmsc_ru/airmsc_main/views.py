@@ -78,6 +78,13 @@ def get_data_for_chart(request):
         data = cur.fetchall()
         cur.close()
         conn.close()
+        data_provider = {}
+        for entry in data:
+            if str(entry[0]) in data_provider:
+                data_provider[str(entry[0])] = [(entry[1], entry[2])]
+            else:
+                data_provider[str(entry[0])].append(entry[1], entry[2])
+
         return json.dumps(data)
     else:
         return Http404
