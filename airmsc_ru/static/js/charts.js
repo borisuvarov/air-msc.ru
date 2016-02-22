@@ -1,7 +1,7 @@
 $(function() {
 
     var chartData = function getChartData() {
-        $.ajax({
+        return $.ajax({
             url: '/charts-data/',
             type: 'GET',
             data: {'station': 'kapotnya'}
