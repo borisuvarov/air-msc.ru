@@ -14,7 +14,7 @@ $(function() {
         });
     }();
 
-    console.log(chartData);
+    console.log(chartData.responseJSON);
 
     var chart = AmCharts.makeChart("chartdiv", {
         "theme": "light",
