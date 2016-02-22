@@ -162,6 +162,8 @@ def process(request):
             acthash = hashlib.sha1(salt.encode('utf-8') + email.encode('utf-8')).hexdigest()
             new_subscribition = MemberData.objects.create(
                 member=new_member,
+                subscribitions_count=len(true_list),
+                subscribitions=str(true_list),
                 activation_hash=acthash,
                 donskoyshabolovka=clean_subscribitions_dict['donskoyshabolovka'],
                 donskoychura=clean_subscribitions_dict['donskoychura'],
