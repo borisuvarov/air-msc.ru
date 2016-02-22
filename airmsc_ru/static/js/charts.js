@@ -3,9 +3,9 @@ $(function() {
 
     function getChartData(station) {
         $.ajax({
-            url: url,
+            url: '/charts-data/',
             type: GET,
-            data: ''
+            data: 'kapotnya'
         })
         .done(function(content) {
             return content;
