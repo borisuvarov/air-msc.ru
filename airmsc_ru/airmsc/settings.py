@@ -11,7 +11,7 @@ with open(os.path.join(BASE_DIR, 'airmsc/emailpswd.txt')) as f:
 with open(os.path.join(BASE_DIR, 'airmsc/databasepswd.txt')) as f:
     DATABASE_PASSWORD = f.read().strip()
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["178.62.213.218", "air-msc.ru"]
 
