@@ -7,7 +7,7 @@ $(function() {
 
     function drawChart(rawData) {
         console.log(rawData);
-        var chartData = {};
+        var chartData = [];
         $.each(rawData, function(index, value) {
             console.log(value);
             $.each(value, function(index, arr) {
