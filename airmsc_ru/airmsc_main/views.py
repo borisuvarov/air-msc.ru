@@ -3,8 +3,11 @@ import random
 import sys
 from redis import Redis
 from rq import Queue
+import psycopg2
+import json
 
 from django.shortcuts import render
+from django.conf import settings
 from .forms import MemberModelForm
 from .models import Member, MemberData
 from django.template.loader import render_to_string
@@ -59,6 +62,22 @@ clean_subscribitions_dict = {
     'scherbinka': False,
     'salarievo': False,
 }
+
+
+def get_data_for_chart(request):
+    station = request.GET.get('station')
+    conn = psycopg2.connect(
+        database="djangoair",
+        user="djangoair",
+        password=settings.DATABASE_PASSWORD,
+        host="127.0.0.1")
+    cur = conn.cursor()
+    cur.execute("SELECT checktime, substance, concentration FROM mosecomon WHERE station=" + station + ";")
+    data = cur.fetchall()
+    sys.stdout.write(str(data))
+    cur.close()
+    conn.close()
+    return json.dumps(data)
 
 
 def activation(request):
@@ -222,8 +241,6 @@ def process(request):
                                          email_content_context)
             msg_html = render_to_string('email_activation.html',
                                         email_content_context)
-            # mail.send_mail(subject, msg_plain, sender, [email],
-            #                html_message=msg_html, fail_silently=False)
             try:
                 Q.enqueue_call(func=mail.send_mail,
                                args=(subject, msg_plain, sender, [email]),
