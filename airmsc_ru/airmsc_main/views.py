@@ -84,7 +84,7 @@ def get_data_for_chart(request):
             if date not in data_provider:
                 data_provider[date] = [(entry[1], entry[2])]
             else:
-                data_provider[date].append(entry[1], entry[2])
+                data_provider[date].append((entry[1], entry[2]))
 
         return json.dumps(data)
     else:
