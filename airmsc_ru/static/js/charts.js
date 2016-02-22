@@ -1,18 +1,10 @@
 $(function() {
 
-    var chartData = function getChartData() {
-        return $.ajax({
-            url: '/charts-data/',
-            type: 'GET',
-            data: {'station': 'kapotnya'}
-        })
-        .done(function(content) {
-            return content;
-        })
-        .fail(function() {
-            console.log('oops, failed to load station data');
-        });
-    }();
+    var chartData,
+        samplePayload = {'station': 'kapotnya'};
+
+
+    $.get('/charts-data/', samplePayload, function(data) {chartData = data}, 'json');
 
     console.log(chartData);
 
