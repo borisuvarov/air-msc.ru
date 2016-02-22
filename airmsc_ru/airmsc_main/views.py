@@ -80,10 +80,11 @@ def get_data_for_chart(request):
         conn.close()
         data_provider = {}
         for entry in data:
-            if str(entry[0]) in data_provider:
-                data_provider[str(entry[0])] = [(entry[1], entry[2])]
+            date = str(entry[0])
+            if date not in data_provider:
+                data_provider[date] = [(entry[1], entry[2])]
             else:
-                data_provider[str(entry[0])].append(entry[1], entry[2])
+                data_provider[date].append(entry[1], entry[2])
 
         return json.dumps(data)
     else:
