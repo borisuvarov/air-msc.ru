@@ -7,21 +7,18 @@ $(function() {
 
     function drawChart(rawData) {
         console.log(rawData);
-        var chartData = {
-            date: [],
-            "H2S (Сероводород)": [],
-            "NO (Оксид азота)": [],
-            "CO (Оксид углерода)": [],
-            "NO2 (Диоксид азота)": [],
-            "CH4 (Метан)": []
-        };
+        var chartData = {};
         $.each(rawData, function(index, value) {
-            chartData.date.push(new Date(Object.keys(rawData)[index]));
             console.log(value);
-            //$.each(value, function(index, arr) {
-            //    if (value[0] == 'H2S (Сероводород)')
-            //})
+            $.each(value, function(index, arr) {
+                chartData.push(
+                    {
+                        date: new Date(Object.keys(rawData)[index]),
+                    }
+                )
+            })
         });
+        console.log(chartData);
         var chart = AmCharts.makeChart("chartdiv", {
             "theme": "light",
             "type": "serial",
