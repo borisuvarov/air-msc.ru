@@ -7,6 +7,7 @@ import psycopg2
 import json
 
 from django.shortcuts import render, Http404
+from django.http import JsonResponse
 from django.conf import settings
 from .forms import MemberModelForm
 from .models import Member, MemberData
@@ -86,7 +87,7 @@ def get_data_for_chart(request):
             else:
                 data_provider[date].append((entry[1], entry[2]))
 
-        return json.dumps(data_provider)
+        return JsonResponse(data_provider)
     else:
         return Http404
 
