@@ -1,12 +1,11 @@
 $(function() {
 
-    var chartData,
-        samplePayload = {'station': 'kapotnya'};
+    var samplePayload = {'station': 'kapotnya'};
 
 
     $.get('/charts-data/', samplePayload, function(chartData) {drawChart(chartData)}, 'json');
 
-    function drawChart() {
+    function drawChart(chartData) {
         console.log(chartData);
         var chart = AmCharts.makeChart("chartdiv", {
             "theme": "light",
