@@ -9,13 +9,12 @@ $(function() {
         console.log(rawData);
         var chartData = [];
         $.each(rawData, function(index, value) {
-            console.log(value);
             $.each(value, function(index, arr) {
-                chartData.push(
-                    {
-                        date: new Date(Object.keys(rawData)[index]),
-                    }
-                )
+
+                var dataPiece = {};
+                dataPiece['date'] = new Date(Object.keys(rawData)[index]);
+                dataPiece[arr[0]] = arr[1];
+                chartData.push(dataPiece);
             })
         });
         console.log(chartData);
