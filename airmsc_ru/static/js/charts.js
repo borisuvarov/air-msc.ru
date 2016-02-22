@@ -5,7 +5,7 @@ $(function() {
         $.ajax({
             url: '/charts-data/',
             type: 'GET',
-            data: 'kapotnya'
+            data: {'station': 'kapotnya'}
         })
         .done(function(content) {
             return content;
