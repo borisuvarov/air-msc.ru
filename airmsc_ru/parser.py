@@ -217,8 +217,6 @@ def send_email(overpdk_list_all_stations):
                     r.incr('sent_today')
                 except Exception as e:
                     sys.stdout.write(str(e))
-            sys.stdout.write(station_names)
-            sys.stdout.write(member.memberdata_set.get().poisoned_stations)
             if station_names and station_names != member.memberdata_set.get().poisoned_stations:
                 emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
                              'http://air-msc.ru/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
