@@ -217,8 +217,8 @@ def send_email(overpdk_list_all_stations):
                     r.incr('sent_today')
                 except Exception as e:
                     sys.stdout.write(str(e))
-            sys.stdout.write(station_names)
-            sys.stdout.write(member.memberdata_set.get().poisoned_stations)
+            sys.stdout.write(str(station_names))
+            sys.stdout.write(str(member.memberdata_set.get().poisoned_stations))
             if station_names and station_names != member.memberdata_set.get().poisoned_stations:
                 emailvars = {'stations': station_names, 'poisons': poison_names, 'unsubscribe':
                              'http://air-msc.ru/unsubscribe/' + '?' + 'pochta=' + recipient + '&'
@@ -295,7 +295,7 @@ def main():
                         (station_name, datetime_of_check, substance, concen))
                     conn.commit()
                     for pdk_tuple in PDK:
-                        if substance == pdk_tuple[0] and concen >= pdk_tuple[1]:
+                        if substance == pdk_tuple[0] and concen <= pdk_tuple[1]:
                             sentinel = True
                             overpdk_list_for_station.append((substance, concen))
                 except:
