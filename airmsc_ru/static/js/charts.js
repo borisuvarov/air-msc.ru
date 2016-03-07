@@ -68,7 +68,6 @@ $(function() {
                     }
             };
         AmCharts.makeChart('kapotnyaCO', chartConfig);
-        AmCharts.makeChart('kapotnyaCH4', chartConfig);
 
         //window['chart' + poison].addListener("dataUpdated", zoomChart);
         //zoomChart();
