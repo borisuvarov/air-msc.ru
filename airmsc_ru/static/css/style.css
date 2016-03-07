@@ -74,6 +74,14 @@
     padding-bottom: 25px;
 }
 
+.social-share {
+    display: inline-block;
+}
+
+.social-buttons {
+    margin-bottom: 25px;
+}
+
 @media screen and (max-width: 1075px) {
 	#id_email, #id_loginmail {
 		margin-bottom: 5px;
