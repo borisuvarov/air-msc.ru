@@ -68,6 +68,12 @@
 	height: 500px;
 }
 
+#chartd > h3 {
+    height: 30px;
+    width: 300px;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 1075px) {
 	#id_email, #id_loginmail {
 		margin-bottom: 5px;
