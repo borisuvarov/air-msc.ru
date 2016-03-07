@@ -5,6 +5,7 @@ from redis import Redis
 from rq import Queue
 import psycopg2
 import json
+from collections import OrderedDict
 
 from django.shortcuts import render, Http404
 from django.http import JsonResponse
@@ -75,11 +76,11 @@ def get_data_for_chart(request):
             host="127.0.0.1")
         cur = conn.cursor()
         cur.execute("SELECT DATE(checktime), substance, MAX(concentration) FROM mosecomon WHERE station='"
-                    + station + "'" + "AND DATE(checktime) >= now() - INTERVAL '30 DAY' GROUP BY substance, DATE(checktime) ORDER BY DATE(checktime);")
+                    + station + "'" + "AND DATE(checktime) >= now() - INTERVAL '20 DAY' GROUP BY substance, DATE(checktime) ORDER BY DATE(checktime);")
         data = cur.fetchall()
         cur.close()
         conn.close()
-        data_provider = {}
+        data_provider = OrderedDict()
         for entry in data:
             date = str(entry[0])
             if date not in data_provider:
