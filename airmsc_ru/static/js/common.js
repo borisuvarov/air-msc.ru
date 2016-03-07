@@ -307,6 +307,69 @@ function init() {
 
 }
 
+//
+//$(function() {
+//
+//
+//
+//
+//    function drawCharts(rawData) {
+//       $.each(rawData['poisons'], function(index, value) {
+//            drawChart(rawData, value);
+//       });
+//    }
+//
+//    function drawChart(rawData, poison) {
+//        var chartData = [];
+//        $.each(rawData['real_data'], function(date_key, value) {
+//	    var dataPiece = {};
+//            dataPiece['date'] = new Date(date_key);
+//            $.each(value, function(index, arr) {
+//                if (arr[poison] != undefined) {
+//                    dataPiece[poison] = arr[poison];
+//                    chartData.push(dataPiece);
+//                    console.log(dataPiece);
+//                }
+//            })
+//        });
+//        console.log(chartData);
+//        var chartdiv = 'kapotnya' + poison;
+//        console.log(chartdiv);
+//        AmCharts.makeChart(chartdiv, {
+//            "theme": "light",
+//            "type": "serial",
+//            "dataProvider": chartData,
+//            "valueAxes": [{
+//                "inside": true,
+//                "axisAlpha": 0
+//            }],
+//            "graphs": [{
+//                "id": "g1",
+//                "balloonText": "<div style='margin:5px; font-size:19px;'><span style='font-size:13px;'>[[category]]</span><br>[[value]]</div>",
+//                "bullet": "round",
+//                "bulletBorderAlpha": 1,
+//                "bulletBorderColor": "#FFFFFF",
+//                "hideBulletsCount": 50,
+//                "lineThickness": 2,
+//                "lineColor": "red",
+//                "negativeLineColor": "green",
+//                "negativeBase": 0.05,
+//		        "type": "smoothedLine",
+//                "valueField": poison
+//            }
+//            ],
+//            "chartScrollbar": {},
+//            "chartCursor": {},
+//            "categoryField": "date",
+//            "categoryAxis": {
+//                "parseDates": true,
+//                "axisAlpha": 0,
+//                "minHorizontalGap": 55
+//            }
+//        });
+//    }
+//});
+
 var processFormUrl = '/process/',
     loginFormUrl = '/loginform/',
     loginUrl = '/login/',
@@ -314,7 +377,8 @@ var processFormUrl = '/process/',
     $mainForm = $("#main_form"),
     $login = $('#login'),
     $messageBox = $('#message_box'),
-    $formAjaxContainer = $('.form-ajax-container');
+    $formAjaxContainer = $('.form-ajax-container'),
+    chartD = $('#chartd');
 
 (function() {
     app = {
@@ -333,12 +397,24 @@ var processFormUrl = '/process/',
             },
 
             selectOneStation: function(e) {
+                $('.chartpoison').remove();
                 var stationId = e.get('target')['properties'].get('id'),
                     DOMstationId = '#' + stationId;
                 $(DOMstationId).removeClass('unchosen').addClass('chosen');
                 if (subscribitionsList.indexOf(stationId) < 0) {
                     subscribitionsList.push(stationId);
                 }
+
+                var payload = {'station': 'kapotnya'};
+                $.get('/charts-data/', payload, function(rawData) {
+                    $.each(rawData['poisons'], function(index, value) {
+                        chartD.append('<div' + ' class="h3">'+ e.target + ' – ' + value + '</div>');
+                        chartD.append('<div' + ' class="chartpoison" ' + 'id="' + value + '"></div>');
+                    });
+                    setTimeout(app.drawCharts(rawData), 1000);
+                }, 'json');
+
+
             },
 
             selectStations: function(e) {
@@ -473,12 +549,65 @@ var processFormUrl = '/process/',
                     .always(function() {
                         submitBtn.removeAttr('disabled');
                     });
+            },
+
+            drawCharts: function(rawData) {
+               $.each(rawData['poisons'], function(index, value) {
+                    app.drawChart(rawData, value);
+               });
+            },
+
+            drawChart: function(rawData, poison) {
+                var chartData = [];
+                $.each(rawData['real_data'], function(date_key, value) {
+                var dataPiece = {};
+                    dataPiece['date'] = new Date(date_key);
+                    $.each(value, function(index, arr) {
+                        if (arr[poison] != undefined) {
+                            dataPiece[poison] = arr[poison];
+                            chartData.push(dataPiece);
+                            console.log(dataPiece);
+                        }
+                    })
+                });
+                AmCharts.makeChart(poison, {
+                    "theme": "light",
+                    "type": "serial",
+                    "dataProvider": chartData,
+                    "valueAxes": [{
+                        "inside": true,
+                        "axisAlpha": 0
+                    }],
+                    "graphs": [{
+                        "id": "g1",
+                        "balloonText": "<div style='margin:5px; font-size:19px;'><span style='font-size:13px;'>[[category]]</span><br>[[value]]</div>",
+                        "bullet": "round",
+                        "bulletBorderAlpha": 1,
+                        "bulletBorderColor": "#FFFFFF",
+                        "hideBulletsCount": 50,
+                        "lineThickness": 2,
+                        "lineColor": "red",
+                        "negativeLineColor": "green",
+                        "negativeBase": 0.05,
+                        "type": "smoothedLine",
+                        "valueField": poison
+                    }
+                    ],
+                    "chartScrollbar": {},
+                    "chartCursor": {},
+                    "categoryField": "date",
+                    "categoryAxis": {
+                        "parseDates": true,
+                        "axisAlpha": 0,
+                        "minHorizontalGap": 55
+                    }
+                });
             }
 
     };
 
     app.initialize();
 
-    $(".dropdown-toggle-js").dropdown();
+
 
 }());

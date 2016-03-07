@@ -1,12 +1,13 @@
 $(function() {
 
-    var samplePayload = {'station': 'kapotnya'};
+    var samplePayload = {'station': 'kapotnya'},
+        chartD = $('#chartd');
 
 
     $.get('/charts-data/', samplePayload, function(rawData) {
         $.each(rawData['poisons'], function(index, value) {
-            $('#chartd').append('<div' + ' class="h3">Капотня – ' + value + '</div>');
-            $('#chartd').append('<div' + ' id="kapotnya' + value + '"></div>');
+            chartD.append('<div' + ' class="h3">Капотня – ' + value + '</div>');
+            chartD.append('<div' + ' id="kapotnya' + value + '"></div>');
         });
         setTimeout(drawCharts(rawData), 1000);
     }, 'json');
@@ -67,16 +68,5 @@ $(function() {
                 "minHorizontalGap": 55
             }
         });
-
-        //window['chart' + poison].addListener("dataUpdated", zoomChart);
-        //zoomChart();
-
-        //function zoomChart() {
-        //    if (window['chart' + poison]) {
-        //        if (window['chart' + poison].zoomToIndexes) {
-        //            window['chart' + poison].zoomToIndexes(130, chartData.length - 1);
-        //        }
-        //    }
-        //}
     }
 });
