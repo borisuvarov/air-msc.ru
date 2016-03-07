@@ -3,13 +3,18 @@ $(function() {
     var samplePayload = {'station': 'kapotnya'};
 
 
-    $.get('/charts-data/', samplePayload, function(rawData) {drawCharts(rawData)}, 'json');
+    $.get('/charts-data/', samplePayload, function(rawData) {
+        $.each(rawData['poisons'], function(index, value) {
+            $('#chartdiv').append('<div' + ' id="kapotnya-' + value + '"></div>');
+        });
+        setTimeout(drawCharts(rawData), 1000);
+    }, 'json');
+
+
     
     function drawCharts(rawData) {
        $.each(rawData['poisons'], function(index, value) {
-            var poison = value;
-            $('#chartdiv').append('<div' + ' id="kapotnya-' + poison + '"></div>');
-            setTimeout(drawChart(rawData, poison), 1000);
+            drawChart(rawData, value);
        });
     }
 
