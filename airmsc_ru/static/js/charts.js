@@ -36,7 +36,8 @@ $(function() {
                 "lineThickness": 2,
                 "lineColor": "red",
                 "negativeLineColor": "green",
-                "negativeBase": 12,
+                "negativeBase": 0.05,
+		"type": "smoothedLine",
                 "valueField": "NO2"
             }
             //{
