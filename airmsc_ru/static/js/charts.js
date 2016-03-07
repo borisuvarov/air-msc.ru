@@ -34,7 +34,7 @@ $(function() {
         console.log(chartData);
         var chartdiv = '"kapotnya' + poison + '"';
         console.log(chartdiv);
-        window['chart' + poison] = AmCharts.makeChart(chartdiv, {
+        window['chart' + poison] = AmCharts.makeChart('kapotnyaCO', {
             "theme": "light",
             "type": "serial",
             "dataProvider": chartData,
