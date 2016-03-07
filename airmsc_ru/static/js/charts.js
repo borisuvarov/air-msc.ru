@@ -10,10 +10,10 @@ $(function() {
         var chartData = [];
         $.each(rawData, function(index, value) {
             $.each(value, function(index, arr) {
-
                 var dataPiece = {};
                 dataPiece['date'] = new Date(Object.keys(rawData)[index]);
                 dataPiece[arr[0]] = arr[1];
+                console.log(dataPiece);
                 chartData.push(dataPiece);
             })
         });
