@@ -32,7 +32,7 @@ $(function() {
             })
         });
         console.log(chartData);
-        var chartdiv = '"kapotnya-' + poison + '"';
+        var chartdiv = '"kapotnya' + poison + '"';
         console.log(chartdiv);
         window['chart' + poison] = AmCharts.makeChart(chartdiv, {
             "theme": "light",
