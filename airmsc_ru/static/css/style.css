@@ -69,10 +69,11 @@
 }
 
 #chartd > .h3 {
-    height: 30px;
+    height: 20px;
     width: 300px;
     margin: 0 auto;
-    padding-top: 30px;
+    padding-top: 35px;
+    padding-bottom: 25px;
 }
 
 @media screen and (max-width: 1075px) {
