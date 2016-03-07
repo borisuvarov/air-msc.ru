@@ -9,7 +9,7 @@ $(function() {
        $.each(rawData['poisons'], function(index, value) {
             var poison = value;
             $('#chartdiv').append('<div' + ' id="kapotnya-' + poison + '"></div>');
-            drawChart(rawData, poison);
+            setTimeout(drawChart(rawData, poison), 1000);
        });
     }
 
