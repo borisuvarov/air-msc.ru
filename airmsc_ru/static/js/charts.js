@@ -6,11 +6,11 @@ $(function() {
     $.get('/charts-data/', samplePayload, function(rawData) {drawCharts(rawData)}, 'json');
     
     function drawCharts(rawData) {
-       $.each(rawData['poisons'], function(index, value){
-var poison = value;
-$('#chartdiv').append('<div' + ' id="kapotnya-' + poison + '"></div>');
-	   drawChart(rawData, poison);
-        });
+       $.each(rawData['poisons'], function(index, value) {
+            var poison = value;
+            $('#chartdiv').append('<div' + ' id="kapotnya-' + poison + '"></div>');
+            drawChart(rawData, poison);
+       });
     }
 
     function drawChart(rawData, poison) {
@@ -26,6 +26,7 @@ $('#chartdiv').append('<div' + ' id="kapotnya-' + poison + '"></div>');
                 }
             })
         });
+        console.log(chartData);
         var chart = AmCharts.makeChart('kapotnya-SO2', {
             "theme": "light",
             "type": "serial",
@@ -45,7 +46,7 @@ $('#chartdiv').append('<div' + ' id="kapotnya-' + poison + '"></div>');
                 "lineColor": "red",
                 "negativeLineColor": "green",
                 "negativeBase": 0.05,
-		"type": "smoothedLine",
+		        "type": "smoothedLine",
                 "valueField": "NO2"
             }
             ],
