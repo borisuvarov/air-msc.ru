@@ -6,12 +6,12 @@ $(function() {
     $.get('/charts-data/', samplePayload, function(rawData) {drawChart(rawData)}, 'json');
 
     function drawChart(rawData) {
-        console.log(rawData);
+        //console.log(rawData);
         var chartData = [];
         $.each(rawData, function(index, value) {
             $.each(value, function(index, arr) {
                 if (arr['NO2'] != undefined) {
-                    console.log(arr);
+                    //console.log(arr);
                     var dataPiece = {};
                     dataPiece['date'] = new Date(Object.keys(rawData)[index]);
                     dataPiece['NO2'] = arr['NO2'];
@@ -39,7 +39,7 @@ $(function() {
                 "lineColor": "red",
                 "negativeLineColor": "green",
                 "negativeBase": 12,
-                "valueField": "date"
+                "valueField": "NO2"
             }
             //{
             //    "id": "g2",
