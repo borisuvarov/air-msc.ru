@@ -3,18 +3,16 @@ $(function() {
     var samplePayload = {'station': 'kapotnya'};
 
 
-    $.get('/charts-data/', samplePayload, function(rawData) {drawChart(rawData)}, 'json');
+    $.get('/charts-data/', samplePayload, function(rawData) {drawChart(rawData, 'NO2')}, 'json');
 
-    function drawChart(rawData) {
-        //console.log(rawData);
+    function drawChart(rawData, poison) {
         var chartData = [];
         $.each(rawData, function(index, value) {
             var dataPiece = {};
             dataPiece['date'] = new Date(Object.keys(rawData)[index]);
             $.each(value, function(index, arr) {
-                if (arr['NO2'] != undefined) {
-                    //console.log(arr);
-                    dataPiece['NO2'] = arr['NO2'];
+                if (arr[poison] != undefined) {
+                    dataPiece[poison] = arr[poison];
                     console.log(dataPiece);
                     chartData.push(dataPiece);
                 }
