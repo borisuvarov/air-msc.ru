@@ -405,7 +405,7 @@ var processFormUrl = '/process/',
                     subscribitionsList.push(stationId);
                 }
 
-                var payload = {'station': 'kapotnya'};
+                var payload = {'station': stationId};
                 $.get('/charts-data/', payload, function(rawData) {
                     $.each(rawData['poisons'], function(index, value) {
                         chartD.append('<div' + ' class="h3">'+ e.target + ' – ' + value + '</div>');
