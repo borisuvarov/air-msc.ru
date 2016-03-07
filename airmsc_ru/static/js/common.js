@@ -407,10 +407,10 @@ var processFormUrl = '/process/',
                 }
 
                 var payload = {'station': stationId};
-                console.log(e);
+                console.log(e.get('target')['properties']['_K']);
                 $.get('/charts-data/', payload, function(rawData) {
                     $.each(rawData['poisons'], function(index, value) {
-                        chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties'].get('_K').get('id') + ' – ' + value + '</div>');
+                        chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties']['_K']['id'] + ' – ' + value + '</div>');
                         chartD.append('<div' + ' class="chartpoison" ' + 'id="' + value + '"></div>');
                     });
                     setTimeout(app.drawCharts(rawData), 1000);
@@ -568,7 +568,6 @@ var processFormUrl = '/process/',
                         if (arr[poison] != undefined) {
                             dataPiece[poison] = arr[poison];
                             chartData.push(dataPiece);
-                            console.log(dataPiece);
                         }
                     })
                 });
