@@ -10,10 +10,10 @@ $(function() {
         var chartData = [];
         $.each(rawData, function(index, value) {
             $.each(value, function(index, arr) {
+                var dataPiece = {};
+                dataPiece['date'] = new Date(Object.keys(rawData)[index]);
                 if (arr['NO2'] != undefined) {
                     //console.log(arr);
-                    var dataPiece = {};
-                    dataPiece['date'] = new Date(Object.keys(rawData)[index]);
                     dataPiece['NO2'] = arr['NO2'];
                     console.log(dataPiece);
                     chartData.push(dataPiece);
