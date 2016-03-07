@@ -103,14 +103,18 @@ def get_data_for_chart(request):
         data = cur.fetchall()
         cur.close()
         conn.close()
-        data_provider = OrderedDict()
+        data_provider = {}
+        real_data = OrderedDict()
+        poisons = set()
         for entry in data:
             date = str(entry[0])
-            if date not in data_provider:
-                data_provider[date] = [{TRANSLIT_MAP[entry[1]]: entry[2]}]
+            poisons.add(TRANSLIT_MAP[entry[1]])
+            if date not in real_data:
+                real_data[date] = [{TRANSLIT_MAP[entry[1]]: entry[2]}]
             else:
-                data_provider[date].append({TRANSLIT_MAP[entry[1]]: entry[2]})
-
+                real_data[date].append({TRANSLIT_MAP[entry[1]]: entry[2]})
+        data_provider.update({'poisons': list(poisons)})
+        data_provider.update({'real_data': real_data})
         return JsonResponse(data_provider)
     else:
         return Http404

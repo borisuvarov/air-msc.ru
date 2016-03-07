@@ -3,22 +3,30 @@ $(function() {
     var samplePayload = {'station': 'kapotnya'};
 
 
-    $.get('/charts-data/', samplePayload, function(rawData) {drawChart(rawData, 'NO2')}, 'json');
+    $.get('/charts-data/', samplePayload, function(rawData) {drawCharts(rawData)}, 'json');
+    
+    function drawCharts(rawData) {
+       $.each(rawData['poisons'], function(index, value){
+var poison = value;
+$('#chartdiv').append('<div' + ' id="kapotnya-' + poison + '"></div>');
+	   drawChart(rawData, poison);
+        });
+    }
 
     function drawChart(rawData, poison) {
         var chartData = [];
-        $.each(rawData, function(date_key, value) {
+        $.each(rawData['real_data'], function(date_key, value) {
 	    var dataPiece = {};
             dataPiece['date'] = new Date(date_key);
             $.each(value, function(index, arr) {
                 if (arr[poison] != undefined) {
                     dataPiece[poison] = arr[poison];
-                    console.log(dataPiece);
                     chartData.push(dataPiece);
+                    console.log(dataPiece);
                 }
             })
         });
-        var chart = AmCharts.makeChart("chartdiv", {
+        var chart = AmCharts.makeChart('kapotnya-SO2', {
             "theme": "light",
             "type": "serial",
             "dataProvider": chartData,
