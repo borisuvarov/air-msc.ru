@@ -479,4 +479,6 @@ var processFormUrl = '/process/',
 
     app.initialize();
 
+    $(".dropdown-toggle-js").dropdown();
+
 }());
