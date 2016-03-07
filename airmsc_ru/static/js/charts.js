@@ -27,7 +27,9 @@ $(function() {
             })
         });
         console.log(chartData);
-        var chart = AmCharts.makeChart('"kapotnya-' + poison + '"', {
+        var chartdiv = '"kapotnya-' + poison + '"';
+        console.log(chartdiv);
+        var chart = AmCharts.makeChart(chardiv, {
             "theme": "light",
             "type": "serial",
             "dataProvider": chartData,
