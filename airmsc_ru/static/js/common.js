@@ -398,6 +398,7 @@ var processFormUrl = '/process/',
 
             selectOneStation: function(e) {
                 $('.chartpoison').remove();
+                $('.chartcaption').remove();
                 var stationId = e.get('target')['properties'].get('id'),
                     DOMstationId = '#' + stationId;
                 $(DOMstationId).removeClass('unchosen').addClass('chosen');
@@ -406,9 +407,10 @@ var processFormUrl = '/process/',
                 }
 
                 var payload = {'station': stationId};
+                console.log(e.get('target'));
                 $.get('/charts-data/', payload, function(rawData) {
                     $.each(rawData['poisons'], function(index, value) {
-                        chartD.append('<div' + ' class="h3">'+ e.get('target')['properties'].get('text') + ' – ' + value + '</div>');
+                        chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties'].get('text') + ' – ' + value + '</div>');
                         chartD.append('<div' + ' class="chartpoison" ' + 'id="' + value + '"></div>');
                     });
                     setTimeout(app.drawCharts(rawData), 1000);
