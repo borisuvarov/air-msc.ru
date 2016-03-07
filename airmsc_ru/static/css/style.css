@@ -83,6 +83,10 @@
     margin-bottom: 25px;
 }
 
+.fb-share-button > span {
+    height: 25px !important;
+}
+
 @media screen and (max-width: 1075px) {
 	#id_email, #id_loginmail {
 		margin-bottom: 5px;
