@@ -407,7 +407,7 @@ var processFormUrl = '/process/',
                 }
 
                 var payload = {'station': stationId};
-                console.log(e.get('target'));
+                console.log(e);
                 $.get('/charts-data/', payload, function(rawData) {
                     $.each(rawData['poisons'], function(index, value) {
                         chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties'].get('text') + ' – ' + value + '</div>');
