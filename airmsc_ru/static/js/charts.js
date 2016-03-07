@@ -27,7 +27,7 @@ $(function() {
             })
         });
         console.log(chartData);
-        var chart = AmCharts.makeChart('kapotnya-SO2', {
+        var chart = AmCharts.makeChart('"kapotnya-' + poison + '"', {
             "theme": "light",
             "type": "serial",
             "dataProvider": chartData,
