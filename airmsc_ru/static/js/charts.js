@@ -10,12 +10,14 @@ $(function() {
         var chartData = [];
         $.each(rawData, function(index, value) {
             $.each(value, function(index, arr) {
-                console.log(arr);
-                var dataPiece = {};
-                dataPiece['date'] = new Date(Object.keys(rawData)[index]);
-                dataPiece['NO2'] = arr['NO2'];
-		console.log(dataPiece);
-                chartData.push(dataPiece);
+                if (arr['NO2'] != 'indefined') {
+                    console.log(arr);
+                    var dataPiece = {};
+                    dataPiece['date'] = new Date(Object.keys(rawData)[index]);
+                    dataPiece['NO2'] = arr['NO2'];
+                    console.log(dataPiece);
+                    chartData.push(dataPiece);
+                }
             })
         });
         var chart = AmCharts.makeChart("chartdiv", {
