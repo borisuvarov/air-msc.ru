@@ -40,19 +40,6 @@ $(function() {
 		"type": "smoothedLine",
                 "valueField": "NO2"
             }
-            //{
-            //    "id": "g2",
-            //    "balloonText": "<div style='margin:5px; font-size:19px;'><span style='font-size:13px;'>[[category]]</span><br>[[value]]</div>",
-            //    "bullet": "round",
-            //    "bulletBorderAlpha": 1,
-            //    "bulletBorderColor": "#FFFFFF",
-            //    "hideBulletsCount": 50,
-            //    "lineThickness": 2,
-            //    "lineColor": "red",
-            //    "negativeLineColor": "green",
-            //    "negativeBase": 12,
-            //    "valueField": "NO (Оксид азота)"
-            //}
             ],
             "chartScrollbar": {},
             "chartCursor": {},
