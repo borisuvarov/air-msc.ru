@@ -408,7 +408,7 @@ var processFormUrl = '/process/',
                 var payload = {'station': stationId};
                 $.get('/charts-data/', payload, function(rawData) {
                     $.each(rawData['poisons'], function(index, value) {
-                        chartD.append('<div' + ' class="h3">'+ e.target + ' – ' + value + '</div>');
+                        chartD.append('<div' + ' class="h3">'+ e.get('target')['properties'].get('text') + ' – ' + value + '</div>');
                         chartD.append('<div' + ' class="chartpoison" ' + 'id="' + value + '"></div>');
                     });
                     setTimeout(app.drawCharts(rawData), 1000);
