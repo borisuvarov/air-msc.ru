@@ -29,7 +29,7 @@ $(function() {
         console.log(chartData);
         var chartdiv = '"kapotnya-' + poison + '"';
         console.log(chartdiv);
-        var chart = AmCharts.makeChart(chartdiv, {
+        var chart = AmCharts.makeChart('kapotnya-CO', {
             "theme": "light",
             "type": "serial",
             "dataProvider": chartData,
