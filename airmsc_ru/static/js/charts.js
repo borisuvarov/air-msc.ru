@@ -9,9 +9,9 @@ $(function() {
         //console.log(rawData);
         var chartData = [];
         $.each(rawData, function(index, value) {
+            var dataPiece = {};
+            dataPiece['date'] = new Date(Object.keys(rawData)[index]);
             $.each(value, function(index, arr) {
-                var dataPiece = {};
-                dataPiece['date'] = new Date(Object.keys(rawData)[index]);
                 if (arr['NO2'] != undefined) {
                     //console.log(arr);
                     dataPiece['NO2'] = arr['NO2'];
