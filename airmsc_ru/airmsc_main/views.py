@@ -82,7 +82,7 @@ def get_data_for_chart(request):
         conn.close()
         data_provider = OrderedDict()
         for entry in data:
-            sys.stdout.write(entry)
+            sys.stdout.write(str(entry))
             date = str(entry[0])
             if date not in data_provider:
                 data_provider[date] = [(entry[1], entry[2])]
