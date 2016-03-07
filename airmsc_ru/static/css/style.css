@@ -68,7 +68,6 @@
 	height: 500px;
 }
 
-
 @media screen and (max-width: 1075px) {
 	#id_email, #id_loginmail {
 		margin-bottom: 5px;

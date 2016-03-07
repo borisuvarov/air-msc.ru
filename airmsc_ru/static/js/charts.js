@@ -5,6 +5,7 @@ $(function() {
 
     $.get('/charts-data/', samplePayload, function(rawData) {
         $.each(rawData['poisons'], function(index, value) {
+            $('#chartd').append('<div' + ' class="h3">Капотня – ' + value + '</div>');
             $('#chartd').append('<div' + ' id="kapotnya' + value + '"></div>');
         });
         setTimeout(drawCharts(rawData), 1000);
