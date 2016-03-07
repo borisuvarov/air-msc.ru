@@ -47,7 +47,7 @@ $(function() {
                 "negativeLineColor": "green",
                 "negativeBase": 0.05,
 		        "type": "smoothedLine",
-                "valueField": "NO2"
+                "valueField": poison
             }
             ],
             "chartScrollbar": {},
