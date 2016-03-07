@@ -34,38 +34,40 @@ $(function() {
         console.log(chartData);
         var chartdiv = '"kapotnya' + poison + '"';
         console.log(chartdiv);
-        window['chart' + poison] = AmCharts.makeChart('kapotnyaCO', {
-            "theme": "light",
-            "type": "serial",
-            "dataProvider": chartData,
-            "valueAxes": [{
-                "inside": true,
-                "axisAlpha": 0
-            }],
-            "graphs": [{
-                "id": "g1",
-                "balloonText": "<div style='margin:5px; font-size:19px;'><span style='font-size:13px;'>[[category]]</span><br>[[value]]</div>",
-                "bullet": "round",
-                "bulletBorderAlpha": 1,
-                "bulletBorderColor": "#FFFFFF",
-                "hideBulletsCount": 50,
-                "lineThickness": 2,
-                "lineColor": "red",
-                "negativeLineColor": "green",
-                "negativeBase": 0.05,
-		        "type": "smoothedLine",
-                "valueField": poison
-            }
-            ],
-            "chartScrollbar": {},
-            "chartCursor": {},
-            "categoryField": "date",
-            "categoryAxis": {
-                "parseDates": true,
-                "axisAlpha": 0,
-                "minHorizontalGap": 55
-            }
-        });
+
+        var chartConfig = {
+                    "theme": "light",
+                    "type": "serial",
+                    "dataProvider": chartData,
+                    "valueAxes": [{
+                        "inside": true,
+                        "axisAlpha": 0
+                    }],
+                    "graphs": [{
+                        "id": "g1",
+                        "balloonText": "<div style='margin:5px; font-size:19px;'><span style='font-size:13px;'>[[category]]</span><br>[[value]]</div>",
+                        "bullet": "round",
+                        "bulletBorderAlpha": 1,
+                        "bulletBorderColor": "#FFFFFF",
+                        "hideBulletsCount": 50,
+                        "lineThickness": 2,
+                        "lineColor": "red",
+                        "negativeLineColor": "green",
+                        "negativeBase": 0.05,
+                        "type": "smoothedLine",
+                        "valueField": poison
+                    }
+                    ],
+                    "chartScrollbar": {},
+                    "chartCursor": {},
+                    "categoryField": "date",
+                    "categoryAxis": {
+                        "parseDates": true,
+                        "axisAlpha": 0,
+                        "minHorizontalGap": 55
+                    }
+            };
+        AmCharts.makeChart(chartdiv, chartConfig);
 
         //window['chart' + poison].addListener("dataUpdated", zoomChart);
         //zoomChart();
