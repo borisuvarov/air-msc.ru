@@ -8,9 +8,9 @@ $(function() {
     function drawChart(rawData) {
         //console.log(rawData);
         var chartData = [];
-        $.each(rawData, function(index, value) {
-            var dataPiece = {};
-            dataPiece['date'] = new Date(Object.keys(rawData)[index]);
+        $.each(rawData, function(date_key, value) {
+	    var dataPiece = {};
+            dataPiece['date'] = new Date(date_key);
             $.each(value, function(index, arr) {
                 if (arr['NO2'] != undefined) {
                     //console.log(arr);
