@@ -307,68 +307,6 @@ function init() {
 
 }
 
-//
-//$(function() {
-//
-//
-//
-//
-//    function drawCharts(rawData) {
-//       $.each(rawData['poisons'], function(index, value) {
-//            drawChart(rawData, value);
-//       });
-//    }
-//
-//    function drawChart(rawData, poison) {
-//        var chartData = [];
-//        $.each(rawData['real_data'], function(date_key, value) {
-//	    var dataPiece = {};
-//            dataPiece['date'] = new Date(date_key);
-//            $.each(value, function(index, arr) {
-//                if (arr[poison] != undefined) {
-//                    dataPiece[poison] = arr[poison];
-//                    chartData.push(dataPiece);
-//                    console.log(dataPiece);
-//                }
-//            })
-//        });
-//        console.log(chartData);
-//        var chartdiv = 'kapotnya' + poison;
-//        console.log(chartdiv);
-//        AmCharts.makeChart(chartdiv, {
-//            "theme": "light",
-//            "type": "serial",
-//            "dataProvider": chartData,
-//            "valueAxes": [{
-//                "inside": true,
-//                "axisAlpha": 0
-//            }],
-//            "graphs": [{
-//                "id": "g1",
-//                "balloonText": "<div style='margin:5px; font-size:19px;'><span style='font-size:13px;'>[[category]]</span><br>[[value]]</div>",
-//                "bullet": "round",
-//                "bulletBorderAlpha": 1,
-//                "bulletBorderColor": "#FFFFFF",
-//                "hideBulletsCount": 50,
-//                "lineThickness": 2,
-//                "lineColor": "red",
-//                "negativeLineColor": "green",
-//                "negativeBase": 0.05,
-//		        "type": "smoothedLine",
-//                "valueField": poison
-//            }
-//            ],
-//            "chartScrollbar": {},
-//            "chartCursor": {},
-//            "categoryField": "date",
-//            "categoryAxis": {
-//                "parseDates": true,
-//                "axisAlpha": 0,
-//                "minHorizontalGap": 55
-//            }
-//        });
-//    }
-//});
 
 var processFormUrl = '/process/',
     loginFormUrl = '/loginform/',
@@ -378,7 +316,51 @@ var processFormUrl = '/process/',
     $login = $('#login'),
     $messageBox = $('#message_box'),
     $formAjaxContainer = $('.form-ajax-container'),
-    chartD = $('#chartd');
+    chartD = $('#chartd'),
+    translate_poisons = {
+        'CO': 'CO (Оксид углерода)',
+        'NO2': 'NO2 (Диоксид азота)',
+        'NO': 'NO (Оксид азота)',
+        'CH4': 'CH4 (Метан)',
+        'SO2': 'SO2 (Диоксид серы)',
+        'NH3': 'NH3 (Аммиак)',
+        'H2S': 'H2S (Сероводород)',
+        'OZ': 'OZ (Озон)',
+        'PHORMALDEHYDE': 'Формальдегид',
+        'PHENOLE': 'Фенол',
+        'BENZOLE': 'Бензол',
+        'TOLUOLE': 'Толуол',
+        'PARAXYLOLE': 'Параксилол',
+        'STYROLE': 'Стирол',
+        'ETB': 'ETB (Этилбензол)',
+        'NAPHTALYNE': 'Нафталин',
+        'PM10': 'PM10 (Взвешенные частицы менее 10 мкм)',
+        'PM25': 'PM2.5 (Взвешенные частицы менее 2.5 мкм)',
+        'CH-': 'CH- (Неметановые углеводороды',
+        'CHX': 'CHX (Углеводороды суммарные)'
+    },
+    negative_bases = {
+        'CO': 5,
+        'NO2': 0.2,
+        'NO': 0.4,
+        'CH4': 50,
+        'SO2': 0.5,
+        'NH3': 0.2,
+        'H2S': 0.008,
+        'OZ': 0.16,
+        'PHORMALDEHYDE': 0.05,
+        'PHENOLE': 0.01,
+        'BENZOLE': 0.1,
+        'TOLUOLE': 0.6,
+        'PARAXYLOLE': 0.3,
+        'STYROLE': 0.04,
+        'ETB': 0.02,
+        'NAPHTALYNE': 0.007,
+        'PM10': 0.3,
+        'PM25': 0.16,
+        'CH-': 100,
+        'CHX': 100
+    };
 
 (function() {
     app = {
@@ -407,10 +389,9 @@ var processFormUrl = '/process/',
                 }
 
                 var payload = {'station': stationId};
-                console.log(e.get('target')['properties']['_K']);
                 $.get('/charts-data/', payload, function(rawData) {
                     $.each(rawData['poisons'], function(index, value) {
-                        chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties']['_K']['hintContent'] + ' – ' + value + '</div>');
+                        chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties']['_K']['hintContent'] + ' – ' + translate_poisons[value] + '</div>');
                         chartD.append('<div' + ' class="chartpoison" ' + 'id="' + value + '"></div>');
                     });
                     setTimeout(app.drawCharts(rawData), 1000);
@@ -589,7 +570,7 @@ var processFormUrl = '/process/',
                         "lineThickness": 2,
                         "lineColor": "red",
                         "negativeLineColor": "green",
-                        "negativeBase": 0.05,
+                        "negativeBase": negative_bases[poison],
                         "type": "smoothedLine",
                         "valueField": poison
                     }
