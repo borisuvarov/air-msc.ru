@@ -13,6 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="{% static "js/jquery.cookie.js" %}" ></script>
     <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU"></script>
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
 
     <meta property="og:site_name" content="air-msc.ru" />
     <meta property="og:title" content="Получайте на почту уведомления при загрязнении воздуха в вашем районе" />
@@ -30,6 +31,14 @@
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=216215281760450";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-7 col-sm-12" id="map"></div>
@@ -112,9 +121,17 @@
     <div id="footer">Собрана почасовая статистика за {{ days }} сут</div>
     <div class="container">
         <div class="row">
-            <div class="col-sm-5 centered-block">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://air-msc.ru" data-text="Уведомления о загрязнениях воздуха в вашем районе (по данным «Мосэкомониторинга»)" data-lang="ru" data-size="large" data-dnt="true">Твитнуть</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            <div class="col-sm-5">
+                <div class="twitter-button">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://air-msc.ru" data-text="Уведомления о загрязнениях воздуха в вашем районе (по данным «Мосэкомониторинга»)" data-lang="ru" data-size="large" data-dnt="true">Твитнуть</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </div>
+                <div class="fb-like" data-href="http://air-msc.ru" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div class="vk-button">
+                    <script type="text/javascript">
+                        document.write(VK.Share.button({url: "http://air-msc.ru"},{type: "round", text: "Поделиться"}));
+                    </script>
+                </div>
             </div>
         </div>
     </div>
