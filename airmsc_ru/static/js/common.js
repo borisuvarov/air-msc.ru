@@ -410,7 +410,7 @@ var processFormUrl = '/process/',
                 console.log(e.get('target')['properties']['_K']);
                 $.get('/charts-data/', payload, function(rawData) {
                     $.each(rawData['poisons'], function(index, value) {
-                        chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties']['_K']['id'] + ' – ' + value + '</div>');
+                        chartD.append('<div' + ' class="h3 chartcaption">'+ e.get('target')['properties']['_K']['hintContent'] + ' – ' + value + '</div>');
                         chartD.append('<div' + ' class="chartpoison" ' + 'id="' + value + '"></div>');
                     });
                     setTimeout(app.drawCharts(rawData), 1000);
