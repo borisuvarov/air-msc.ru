@@ -67,6 +67,29 @@ clean_subscribitions_dict = {
 
 
 def get_data_for_chart(request):
+
+    TRANSLIT_MAP = {
+        'CO (Оксид углерода)': 'CO',
+        'NO2 (Диоксид азота)': 'NO2',
+        'NO (Оксид азота)': 'NO',
+        'CH4 (Метан)': 'CH4',
+        'SO2 (Диоксид серы)': 'SO2',
+        'NH3 (Аммиак)': 'NH3',
+        'H2S (Сероводород)': 'H2S',
+        'OZ (Озон)': 'OZ',
+        'Формальдегид': 'PHORMALDEHYDE',
+        'Фенол': 'PHENOLE',
+        'Бензол': 'BENZOLE',
+        'Толуол': 'TOLUOLE',
+        'Параксилол': 'PARAXYLOLE',
+        'Стирол': 'STYROLE',
+        'ETB (Этилбензол)': 'ETB',
+        'Нафталин': 'NAPHTALYNE',
+        'PM10 (Взвешенные частицы менее 10 мкм)': 'PM10',
+        'CH- (Неметановые углеводороды': 'CH-',
+        'CHX (Углеводороды суммарные)': 'CHX'
+    }
+
     station = request.GET.get('station')
     if station in clean_subscribitions_dict:
         conn = psycopg2.connect(
@@ -84,9 +107,9 @@ def get_data_for_chart(request):
         for entry in data:
             date = str(entry[0])
             if date not in data_provider:
-                data_provider[date] = [{entry[1]: entry[2]}]
+                data_provider[date] = [{TRANSLIT_MAP[entry[1]]: entry[2]}]
             else:
-                data_provider[date].append({entry[1]: entry[2]})
+                data_provider[date].append({TRANSLIT_MAP[entry[1]]: entry[2]})
 
         return JsonResponse(data_provider)
     else:
