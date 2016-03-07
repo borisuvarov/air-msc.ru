@@ -34,7 +34,7 @@ $(function() {
         console.log(chartData);
         var chartdiv = '"kapotnya-' + poison + '"';
         console.log(chartdiv);
-        var chart = AmCharts.makeChart('kapotnya-CO', {
+        window['chart' + poison] = AmCharts.makeChart(chartdiv, {
             "theme": "light",
             "type": "serial",
             "dataProvider": chartData,
@@ -67,15 +67,15 @@ $(function() {
             }
         });
 
-        chart.addListener("dataUpdated", zoomChart);
-        zoomChart();
+        //window['chart' + poison].addListener("dataUpdated", zoomChart);
+        //zoomChart();
 
-        function zoomChart() {
-            if (chart) {
-                if (chart.zoomToIndexes) {
-                    chart.zoomToIndexes(130, chartData.length - 1);
-                }
-            }
-        }
+        //function zoomChart() {
+        //    if (window['chart' + poison]) {
+        //        if (window['chart' + poison].zoomToIndexes) {
+        //            window['chart' + poison].zoomToIndexes(130, chartData.length - 1);
+        //        }
+        //    }
+        //}
     }
 });
