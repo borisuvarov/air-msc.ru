@@ -17,9 +17,9 @@ class MemberModelForm(forms.ModelForm):
             'blank': 'blank',
         }
         self.fields['email'].widget.attrs['class'] = 'form-control input-lg'
-        self.fields['email'].widget.attrs['placeholder'] = 'Введите email'
+        # self.fields['email'].widget.attrs['placeholder'] = 'Введите email'
         self.fields['password'].widget.attrs['class'] = 'form-control input-lg'
-        self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
+        # self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
 
     class Meta:
         model = Member
