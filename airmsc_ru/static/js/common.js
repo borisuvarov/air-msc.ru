@@ -226,50 +226,13 @@ function init() {
 
 
     stationPlacemarks.forEach(function(item, i, stationPlacemarks) {
+       item.options._options = {
+            preset: 'islands#icon',
+            iconColor: '#9c27b0'
+       };
        myMap.geoObjects.add(item);
     });
 
-    // myMap.geoObjects.add(meschansky);
-    // myMap.geoObjects.add(donskoyshabolovka);
-    // myMap.geoObjects.add(basmanniykazakova);
-    // myMap.geoObjects.add(tverskoy);
-    // myMap.geoObjects.add(presnenskiy);
-    // myMap.geoObjects.add(danilovskiy);
-    // myMap.geoObjects.add(donskoychura);
-    // myMap.geoObjects.add(zapbirulovo);
-    // myMap.geoObjects.add(orekhovo);
-    // myMap.geoObjects.add(tsarytsyno);
-    // myMap.geoObjects.add(konkovo);
-    // myMap.geoObjects.add(akademicheskiy);
-    // myMap.geoObjects.add(gagarinskiy);
-    // myMap.geoObjects.add(southbutovo);
-    // myMap.geoObjects.add(marinskiypark);
-    // myMap.geoObjects.add(lyblinogolovach);
-    // myMap.geoObjects.add(lublinosovkhoz);
-    // myMap.geoObjects.add(ryazanskiy);
-    // myMap.geoObjects.add(kapotnya);
-    // myMap.geoObjects.add(pechatniki);
-    // myMap.geoObjects.add(losiniyostrov);
-    // myMap.geoObjects.add(kosino);
-    // myMap.geoObjects.add(kozhuhovo);
-    // myMap.geoObjects.add(basmanniyspartak);
-    // myMap.geoObjects.add(khamovniki);
-    // myMap.geoObjects.add(bogorodskoe);
-    // myMap.geoObjects.add(southmedvedkovo);
-    // myMap.geoObjects.add(ostankinskiy);
-    // myMap.geoObjects.add(aeroport);
-    // myMap.geoObjects.add(savelovskiy);
-    // myMap.geoObjects.add(dmitrovskiy);
-    // myMap.geoObjects.add(sokol);
-    // myMap.geoObjects.add(pokrovskoestreshnevo);
-    // myMap.geoObjects.add(northtushino);
-    // myMap.geoObjects.add(khoroshevomnevniki);
-    // myMap.geoObjects.add(ramenki);
-    // myMap.geoObjects.add(troparevonikulino);
-    // myMap.geoObjects.add(mozhaisky);
-    // myMap.geoObjects.add(dorogomilovo);
-    // myMap.geoObjects.add(scherbinka);
-    // myMap.geoObjects.add(salarievo);
 
     myMap.geoObjects.events.add('click', function(e) {
         app.selectOneStation(e);
