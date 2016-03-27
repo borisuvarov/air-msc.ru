@@ -5,11 +5,11 @@
 {% block form %}
    <form id="main_form" class="form-inline" method="POST" action="" autocomplete="off">
         {% csrf_token %}
-        <div class="form-group label-floating">
+        <div class="form-group form-group-lg label-floating">
             <label class="control-label">Email</label>
             {{ form.email }}
         </div>
-        <div class="form-group label-floating">
+        <div class="form-group form-group-lg label-floating">
             <label class="control-label">Пароль</label>
             {{ form.password }}
         </div>
