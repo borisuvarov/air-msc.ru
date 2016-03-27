@@ -3,13 +3,13 @@
 {% block caption %}{% endblock %}
 
 {% block form %}
-    <form id="main_form" class="form-inline" method="POST" action="">
+    <form id="main_form" class="form-inline" method="POST" action="" autocomplete="off">
         {% csrf_token %}
         <div class="form-group">
             {% for field in form %}
                 {{ field }}
             {% endfor %}
-            <button type="submit" class="btn btn-primary btn-lg">Подписаться</button>
+            <button type="submit" class="btn btn-raised btn-primary btn-lg">Подписаться</button>
         </div>
         <div id="message_box"></div>
     </form>

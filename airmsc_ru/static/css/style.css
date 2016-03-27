@@ -1,3 +1,7 @@
+body {
+    background-color: white;
+}
+
 .form-inline {
 	padding-top: 10px;
 	padding-bottom: 3px;
@@ -11,6 +15,10 @@
 .unchosen {
 	color: gray;
 
+}
+
+#slogan {
+    line-height: 1.1em;
 }
 
 #subscribe-button, #login-button {
