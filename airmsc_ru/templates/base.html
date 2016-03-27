@@ -56,16 +56,10 @@
                         {% csrf_token %}
                         <div class="form-group label-floating">
                             <label class="control-label">Email</label>
-                            <span class="input-group-addon">
-                                <i class="material-icons">email</i>
-                            </span>
                             {{ form.email }}
                         </div>
                         <div class="form-group label-floating">
                             <label class="control-label">Логин</label>
-                            <span class="input-group-addon">
-                                <i class="material-icons">lock open</i>
-                            </span>
                             {{ form.password }}
                         </div>
                         <button type="submit" id="subscribe-button" class="btn btn-raised btn-primary btn-lg">Подписаться</button>
