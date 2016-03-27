@@ -2,11 +2,6 @@ body {
     background-color: white;
 }
 
-.form-inline {
-	padding-top: 10px;
-	padding-bottom: 3px;
-}
-
 .chosen {
 	color: black;
 	font-weight: bold;
@@ -14,7 +9,6 @@ body {
 
 .unchosen {
 	color: gray;
-
 }
 
 #slogan {

@@ -57,10 +57,10 @@
                                 {{ field }}
                             {% endfor %}
                             <button type="submit" id="subscribe-button" class="btn btn-raised btn-primary btn-lg">Подписаться</button>
-                            <a href="#" id="login">Подписались ранее и хотите изменить свой список станций?</a>
                         </div>
                     </form>
                 {% endblock form %}
+                <a href="#" id="login">Подписались ранее и хотите изменить свой список станций?</a>
             </section>
             {% block message_box %}
                 <div id="message_box"></div>
@@ -140,7 +140,7 @@
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-<script src="{% static "js/material-kit.js" %}" ></script>
+<script src="{% static "js/material.min.js" %}" ></script>
 <script src="{% static "js/common.js" %}" ></script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
