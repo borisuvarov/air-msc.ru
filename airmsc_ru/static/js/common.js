@@ -53,7 +53,8 @@ function init() {
 
     meschansky = new ymaps.Placemark([55.774705, 37.627355], {
         hintContent: 'Мещанский',
-        id: 'meschansky'
+        id: 'meschansky',
+        style: 'default#violetSmallPoint' 
     });
 
     donskoyshabolovka = new ymaps.Placemark([55.714825, 37.604637], {
