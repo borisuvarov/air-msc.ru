@@ -54,12 +54,21 @@
                 {% block form %}
                     <form id="main_form" class="form-inline" method="POST" action="" autocomplete="off">
                         {% csrf_token %}
-                        <div class="form-group">
-                            {% for field in form %}
-                                {{ field }}
-                            {% endfor %}
-                            <button type="submit" id="subscribe-button" class="btn btn-raised btn-primary btn-lg">Подписаться</button>
+                        <div class="form-group label-floating">
+                            <label class="control-label">Email</label>
+                            <span class="input-group-addon">
+                                <i class="material-icons">email</i>
+                            </span>
+                            {{ form[0] }}
                         </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">Логин</label>
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock open</i>
+                            </span>
+                            {{ form[1] }}
+                        </div>
+                        <button type="submit" id="subscribe-button" class="btn btn-raised btn-primary btn-lg">Подписаться</button>
                     </form>
                 {% endblock form %}
                 <a href="#" id="login">Подписались ранее и хотите изменить свой список станций?</a>

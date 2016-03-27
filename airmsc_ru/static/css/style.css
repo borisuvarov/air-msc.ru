@@ -35,6 +35,10 @@ body {
 	margin-bottom: 10px;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
 #login {
 	font-size: 14px;
 	display: inline-block;
