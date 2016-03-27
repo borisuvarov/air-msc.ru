@@ -6,6 +6,10 @@ h2 {
     font-size: 2.2em;
 }
 
+.form-ajax-container {
+    margin-bottom: 15px;
+}
+
 .chosen {
 	color: black;
 	font-weight: bold;
