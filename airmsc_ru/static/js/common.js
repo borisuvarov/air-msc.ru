@@ -54,6 +54,8 @@ function init() {
     meschansky = new ymaps.Placemark([55.774705, 37.627355], {
         hintContent: 'Мещанский',
         id: 'meschansky',
+    }, {
+        preset: 'islands#icon',
         iconColor: '#9c27b0'
     });
 
