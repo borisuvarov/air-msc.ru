@@ -17,9 +17,6 @@ function init() {
         new ymaps.Placemark([55.774705, 37.627355], {
             hintContent: 'Мещанский',
             id: 'meschansky'
-        }, {
-            preset: 'islands#icon',
-            iconColor: '#9c27b0'
         }),
 
         new ymaps.Placemark([55.714825, 37.604637], {
@@ -322,6 +319,8 @@ var processFormUrl = '/process/',
                 $('.chartcaption').remove();
                 var stationId = e.get('target')['properties'].get('id'),
                     DOMstationId = '#' + stationId;
+                console.log(e.get('target')['properties']);
+                console.log(e.get('target'));
                 $(DOMstationId).removeClass('unchosen').addClass('chosen');
                 if (subscribitionsList.indexOf(stationId) < 0) {
                     subscribitionsList.push(stationId);
