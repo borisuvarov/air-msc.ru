@@ -2,6 +2,10 @@ body {
     background-color: white;
 }
 
+h2 {
+    font-size: 2.2em;
+}
+
 .chosen {
 	color: black;
 	font-weight: bold;
